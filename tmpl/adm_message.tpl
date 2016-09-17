@@ -28,6 +28,15 @@
                         <label for="desc">Сообщение</label>
                         <textarea class="form-control" placeholder="Введите текст сообщения" cols="40" rows="3" name="desc"></textarea>
                     </div>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+                        <script>
+                            // Replace the <textarea id="editor1"> with a CKEditor
+                            // instance, using default configuration.
+                            CKEDITOR.replace( 'editor1' );
+                        </script>
+
                     <div class="form-group">
                         <label for="type">Тип сообщения</label>
                         <select name="type" class="form-control">
