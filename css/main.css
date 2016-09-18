@@ -1517,8 +1517,10 @@ h1 {
 .round-title{
     text-align: left;
     font-size: 20px;
+    margin-top: 10px;
 }
 .round-date{
+    margin-top: 10px;
     text-align: right;
 }
 

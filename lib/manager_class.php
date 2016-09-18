@@ -117,7 +117,7 @@ class Manager {
         $password = $this->data["password"];
         $password = $this->hashPassword($password);        
         $session_key = $this->hashSessionKey($login);
-        $r = $this->config->siteAddress;
+        $r = $this->config->siteAddress."?view=messages";
         if ($this->user->checkUser($login, $password)) {            
             $_SESSION["login"] = $login;
             $_SESSION["password"] = $password;
