@@ -63,7 +63,7 @@ class FavoritesContent extends Modules {
                     $title = ($this->fav_objs[$i]["obj_rooms"] == "Студия")?$this->fav_objs[$i]["obj_rooms"]." квартира": $this->fav_objs[$i]["obj_rooms"]."-к квартира";
                     $text .= "<div class=\"row margin_fav block_fav\"><div class=\"col-md-12\">";
                     $text .= "<div class=\"col-md-4\"><img src=\"".$this->getImage($this->fav_objs[$i]["id"])."\" class=\"img-responsive\"></div><div class=\"col-md-6\"><div class=\"row\"><div class=\"col-md-12\">";
-                    $text .= "<a href=\"#\">".$title."</a></div></div><div class=\"row\"><div class=\"col-md-12 margin_fav\">";
+                    $text .= "<a href=\"".$this->config->siteAddress."content/?id=".$this->fav_objs[$i]["id"]."\">".$title."</a></div></div><div class=\"row\"><div class=\"col-md-12 margin_fav\">";
                     $text .= "<span>".$this->fav_objs[$i]["obj_price"]." руб.</span></div></div><div class=\"row\">";
                     $text .= "<div class=\"col-md-12 margin_fav\" style=\"color: #C1C1C1\">
                         <span>Квартиры <br />
@@ -76,7 +76,7 @@ class FavoritesContent extends Modules {
                     $title = $this->fav_objs[$i]["obj_type"];
                     $text .= "<div class=\"row margin_fav block_fav\"><div class=\"col-md-12\">";
                     $text .= "<div class=\"col-md-4\"><img src=\"".$this->getImage($this->fav_objs[$i]["id"])."\" class=\"img-responsive\"></div><div class=\"col-md-6\"><div class=\"row\"><div class=\"col-md-12\">";
-                    $text .= "<a href=\"#\">".$title."</a></div></div><div class=\"row\"><div class=\"col-md-12 margin_fav\">";
+                    $text .= "<a href=\"".$this->config->siteAddress."content/?id=".$this->fav_objs[$i]["id"]."\">".$title."</a></div></div><div class=\"row\"><div class=\"col-md-12 margin_fav\">";
                     $text .= "<span>".$this->fav_objs[$i]["obj_price"]." руб.</span></div></div><div class=\"row\">";
                     $text .= "<div class=\"col-md-12 margin_fav\" style=\"color: #C1C1C1\">
                         <span>Дом, дача, коттетж<br />
@@ -89,7 +89,7 @@ class FavoritesContent extends Modules {
                     $title = $this->fav_objs[$i]["obj_type"]." в ".$this->fav_objs[$i]["obj_rooms"]."-к";
                     $text .= "<div class=\"row margin_fav block_fav\"><div class=\"col-md-12\">";
                     $text .= "<div class=\"col-md-4\"><img src=\"".$this->getImage($this->fav_objs[$i]["id"])."\" class=\"img-responsive\"></div><div class=\"col-md-6\"><div class=\"row\"><div class=\"col-md-12\">";
-                    $text .= "<a href=\"#\">".$title."</a></div></div><div class=\"row\"><div class=\"col-md-12 margin_fav\">";
+                    $text .= "<a href=\"".$this->config->siteAddress."content/?id=".$this->fav_objs[$i]["id"]."\">".$title."</a></div></div><div class=\"row\"><div class=\"col-md-12 margin_fav\">";
                     $text .= "<span>".$this->fav_objs[$i]["obj_price"]." руб.</span></div></div><div class=\"row\">";
                     $text .= "<div class=\"col-md-12 margin_fav\" style=\"color: #C1C1C1\">
                         <span>Комната<br />
