@@ -277,7 +277,7 @@ class FrontPageContent extends Modules {
 
     protected function getTitle()
     {
-        return "Просмотр обьектов";
+        return "Просмотр объектов";
     }
 
     protected function getDescription()

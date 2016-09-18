@@ -1,12 +1,10 @@
-<h1>%title%</h1>
+<h1 class="adm_mes_title-%type%">%title%</h1>
 <div class="row">
     <div class="col-md-12">
-        <div class="adm_mes-%type%">
+        <div class="adm_mes">
             %adm_messages%
         </div>
     </div>
 </div>
 <br />
-<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Редактировать
-</button>
+<a href="%edit_link%"><button class="btn btn-success">Редактировать</button></a>

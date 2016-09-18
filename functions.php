@@ -41,5 +41,8 @@
     else if ($_POST["create_adm_message"]) {
         $r = $manager->addAdmMessage();
     }
+    else if ($_POST["edit_adm_message"]) {
+        $r = $manager->editAdmMessage();
+    }
     else exit;
     $manager->redirect($r);

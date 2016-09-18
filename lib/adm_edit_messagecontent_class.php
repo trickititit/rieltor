@@ -7,7 +7,7 @@
  */
 require_once "modules_class.php";
 
-class AdmOneMessageContent extends Modules {
+class AdmEditMessageContent extends Modules {
 
     private $adm_messages;
 
@@ -19,7 +19,7 @@ class AdmOneMessageContent extends Modules {
 
     protected function getTitle()
     {
-        return $this->adm_messages["title"];
+        return "Редактировае сообщения";
     }
 
     protected function getDescription()
@@ -44,24 +44,31 @@ class AdmOneMessageContent extends Modules {
 
     protected function getMiddle()
     {
-
         $sr["title"] = $this->adm_messages["title"];
-        $sr["adm_messages"] = htmlspecialchars_decode($this->adm_messages["description"]);
-        $sr["type"] = $this->adm_messages["type"];
-        $sr["edit_link"] = $this->config->siteAddress."?view=edit_message&id=".$this->adm_messages["id"];
-        return $this->getReplaceTemplate($sr, "adm_one_message");
+        $sr["content"] = htmlspecialchars_decode($this->adm_messages["description"]);
+        $sr["short_content"] = $this->adm_messages["short_desc"];
+        $sr["type"] = $this->getType();
+        $sr["id"] = $this->adm_messages["id"];
+        return $this->getReplaceTemplate($sr, "adm_edit_message");
     }
-
-    private function getMessagesTable(){
-        $text = "";
-        for ($i = 0; $i < count($this->adm_messages); $i++) {
-            $text .= "<li class='col-md-12'>";
-            $text .= "<div class=\"round-a-".$this->adm_messages[$i]["type"]."  col-md-12\">
-            <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".$this->adm_messages[$i]["description"]."</div></div> ";
-            $text .= "</li>";
+    
+    private function getType(){
+        $g = array("normal", "attention", "ok", "warning");
+        $type = array();
+        for ($i = 0; $i < 4; $i++) {
+            if ($this->adm_messages["type"] == $g[$i]) {
+                $type[$i] = "value=\"$g[$i]\" selected";
+            } else {
+                $type[$i] = "value=\"".$g[$i]."\"";
+            }
         }
+        $text = "<option ".$type[0].">Обычное</option>
+                                            <option ".$type[1].">Важное</option>
+                                            <option  ".$type[2].">Успешное</option>
+                                            <option  ".$type[3].">Внимание</option>";
         return $text;
     }
+
 
     private function formantDate($time) {
         return date("m-d H:i", $time);

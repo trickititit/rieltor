@@ -22,6 +22,7 @@
     require_once "lib/adm_messagecontent_class.php";
     require_once "lib/adm_onemessagecontent_class.php";
     require_once "lib/adm_add_messagecontent_class.php";
+    require_once "lib/adm_edit_messagecontent_class.php";
 
     $db = new DataBase();
     $view = $_GET["view"];
@@ -77,6 +78,8 @@
         case "one_message": $content = new AdmOneMessageContent($db);
             break;
         case "add_message": $content = new AdmAddMessageContent($db);
+            break;
+        case "edit_message": $content = new AdmEditMessageContent($db);
             break;
         default: exit;
     }

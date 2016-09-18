@@ -44,7 +44,6 @@ class AdmMessageContent extends Modules {
 
     protected function getMiddle()
     {
-
         $sr["adm_messages"] = $this->getMessagesTable();
         return $this->getReplaceTemplate($sr, "adm_message");
     }
@@ -54,8 +53,8 @@ class AdmMessageContent extends Modules {
         for ($i = 0; $i < count($this->adm_messages); $i++) {
             $text .= "<li class='col-md-12'>";
             $text .= "<div class=\"round-a-".$this->adm_messages[$i]["type"]."  col-md-12\">
-            <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".htmlspecialchars_decode($this->adm_messages[$i]["description"])."</div></div> ";
-            $text .= "</li>";
+            <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>Добавлено: ".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".htmlspecialchars_decode($this->adm_messages[$i]["short_desc"])."</div> ";
+            $text .= "<div class='col-md-12'><a href=\"".$this->config->siteAddress."?view=one_message&id=".$this->adm_messages[$i]["id"]."\"><button class=\"btn btn-default\" style='float: right' >Подробнее</button></a></div></div></li>";
         }
         return $text;
     }

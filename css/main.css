@@ -1464,8 +1464,9 @@ h1 {
 }
 
 .round-a-ok{
-    background:#008000;
-    color:#FFFFFF;
+    border: solid 1px #008000;
+    background:#B0F4B0;
+    color:#3F3F3F;
     text-align:center;
     border-radius: 5px;
     word-wrap: break-word;
@@ -1475,8 +1476,9 @@ h1 {
 }
 
 .round-a-warning{
-    background:#CC0000;
-    color:#FFFFFF;
+    border: solid 1px #CC0000;
+    background:#D64848;
+    color:#3F3F3F;
     text-align:center;
     border-radius: 5px;
     word-wrap: break-word;
@@ -1488,8 +1490,9 @@ h1 {
 }
 
 .round-a-normal{
-    background:#444444;
-    color:#FFFFFF;
+    border: solid 1px #606060;
+    background:#EAEAEA;
+    color:#3F3F3F;
     text-align:center;
     border-radius: 5px;
     word-wrap: break-word;
@@ -1499,8 +1502,9 @@ h1 {
 }
 
 .round-a-attention{
-    background:#FFFFCC;
-    color: #222222;
+    border: solid 1px #0808C9;
+    background:#6F9BF2;
+    color: #3F3F3F;
     text-align:center;
     border-radius: 5px;
     word-wrap: break-word;
@@ -1512,7 +1516,7 @@ h1 {
 
 .round-title{
     text-align: left;
-    font-size: 15px;
+    font-size: 20px;
 }
 .round-date{
     text-align: right;
@@ -1535,4 +1539,66 @@ h1 {
     padding:12px;
     position:relative;
     border-bottom:1px solid #777;
+}
+
+.adm_mes_title-ok{
+    margin: 1em 0 0.5em 0;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    position: relative;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+    font-size: 25px;
+    line-height: 40px;
+    color: #20A64F;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(53,86,129, 0.3);
+    background: url("../modal/resources/images/success.png") right no-repeat;
+}
+
+.adm_mes_title-normal{
+    margin: 1em 0 0.5em 0;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    position: relative;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+    font-size: 25px;
+    line-height: 40px;
+    color: #606060;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(53,86,129, 0.3);
+}
+
+.adm_mes_title-attention{
+    margin: 1em 0 0.5em 0;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    position: relative;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+    font-size: 25px;
+    line-height: 40px;
+    color: #0808C9;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(53,86,129, 0.3);
+    background: url("../modal/resources/images/notice.png") right no-repeat;
+}
+
+.adm_mes_title-warning{
+    margin: 1em 0 0.5em 0;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    position: relative;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+    font-size: 25px;
+    line-height: 40px;
+    color: #CC0000;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(53,86,129, 0.3);
+    background: url("../modal/resources/images/error.png") right no-repeat;
+}
+
+.adm_mes{
+    text-align:left;
+    word-wrap: break-word;
+    padding: 10px;
+
 }

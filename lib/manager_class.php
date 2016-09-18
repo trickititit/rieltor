@@ -151,6 +151,18 @@ class Manager {
         else return $this->unknownError($link_);
     }
 
+    public function editAdmMessage() {
+        $link_ = $this->config->siteAddress."?view=messages";
+        $id = $this->data["id"];
+        $title = $this->data["title"];
+        $desc = $this->data["desc"];
+        $short_desc = $this->data["short_desc"];
+        $type = $this->data["type"];
+        $result = $this->adm_message->editMessage($id, $title, $desc,$short_desc, $type);
+        if ($result)  return $this->returnMessage("SUCCESS_EDIT_ADM_MESSAGE", "success", $link_);
+        else return $this->unknownError($link_);
+    }
+
     public function addObject(){
         $type = $this->data["obj_type"];
         $data = time();
