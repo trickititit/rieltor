@@ -20,7 +20,7 @@ class CreateObjContent extends Modules {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return "Создание объекта";
     }
 
     protected function getDescription()

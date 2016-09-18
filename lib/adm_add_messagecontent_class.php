@@ -7,19 +7,19 @@
  */
 require_once "modules_class.php";
 
-class ExportContent extends Modules {
+class AdmAddMessageContent extends Modules {
 
-    private $users;
+    private $adm_messages;
 
     public function __construct($db)
     {
         parent::__construct($db);
-        $this->users = $this->user->getAll();
+        $this->adm_messages = $this->adm_message->get($this->data["id"]);
     }
 
     protected function getTitle()
     {
-        return "Отчет по объектам";
+        return "Создание новое сообщение";
     }
 
     protected function getDescription()
@@ -44,16 +44,13 @@ class ExportContent extends Modules {
 
     protected function getMiddle()
     {
-        $rieltors = "";        
-            $rieltors .= "<select id=\"rieltors\" name=\"user_id\"><option value=\"\">Все объекты</option>";
-            for($i = 0; $i < count($this->users); $i++) {
-                $rieltors .= "<option value=\"".$this->users[$i]["id"]."\">У ".$this->users[$i]["name"]."</option>";
-            }
-            $rieltors .= "</select>";
-        $sr["rieltors"] = $rieltors;        
-        return $this->getReplaceTemplate($sr, "export");
+        return $this->getTemplateOnly("adm_add_message");
     }
-    
+
+
+    private function formantDate($time) {
+        return date("m-d H:i", $time);
+    }
 
     protected function getBottom()
     {
@@ -82,7 +79,7 @@ class ExportContent extends Modules {
 //                break;
 //        }
         $text = "<ul class=\"nav nav-pills margin_bottom\">
-                    <li class=\"dropdown active\">
+                    <li class=\"dropdown\">
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Обьекты<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
@@ -108,7 +105,7 @@ class ExportContent extends Modules {
                         <a href=\"#\">Сообщения</a>
                     </li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .= "<li>
+            $text .= "<li class='active'>
                         <a href=\"".$this->config->siteAddress."?view=comfort\">Удобства</a>
                     </li>";
         }

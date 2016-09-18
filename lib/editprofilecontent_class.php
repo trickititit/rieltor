@@ -23,7 +23,7 @@ class EditProfileContent extends Modules {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return "Редактирование пользователя";
     }
 
     protected function getDescription()

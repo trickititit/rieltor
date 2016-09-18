@@ -20,6 +20,8 @@
     require_once "lib/exportcontent_class.php";
     require_once "lib/profilescontent_class.php";
     require_once "lib/adm_messagecontent_class.php";
+    require_once "lib/adm_onemessagecontent_class.php";
+    require_once "lib/adm_add_messagecontent_class.php";
 
     $db = new DataBase();
     $view = $_GET["view"];
@@ -71,6 +73,10 @@
         case "profiles": $content = new ProfilesContent($db);
             break;
         case "messages": $content = new AdmMessageContent($db);
+            break;
+        case "one_message": $content = new AdmOneMessageContent($db);
+            break;
+        case "add_message": $content = new AdmAddMessageContent($db);
             break;
         default: exit;
     }

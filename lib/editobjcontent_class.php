@@ -24,7 +24,7 @@ class EditObjContent extends Modules {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return "Редактирование объект";
     }
 
     protected function getDescription()

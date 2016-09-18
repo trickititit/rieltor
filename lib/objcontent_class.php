@@ -29,7 +29,7 @@ class ViewObjContent extends ModulesContent {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return $this->getTitleObj();
     }
 
     protected function getDescription()

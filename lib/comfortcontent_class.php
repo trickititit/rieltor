@@ -19,7 +19,7 @@ class ComfortContent extends Modules {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return "Удобства";
     }
 
     protected function getDescription()

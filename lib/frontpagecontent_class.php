@@ -277,7 +277,7 @@ class FrontPageContent extends Modules {
 
     protected function getTitle()
     {
-        //if ($_GET["search"]) $this->search();
+        return "Просмотр обьектов";
     }
 
     protected function getDescription()

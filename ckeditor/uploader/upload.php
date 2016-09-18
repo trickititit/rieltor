@@ -12,7 +12,7 @@ else if ($_FILES['upload']["size"] == 0 OR $_FILES['upload']["size"] > 20050000)
 {
 $message = "Размер файла не соответствует нормам";
 }
-else if (($_FILES['upload']["type"] != "image/jpeg") AND ($_FILES['upload']["type"] != "image/jpeg") AND ($_FILES['upload']["type"] != "image/png"))
+else if (($_FILES['upload']["type"] != "image/jpeg") AND ($_FILES['upload']["type"] != "image/gif") AND ($_FILES['upload']["type"] != "image/png"))
 {
 $message = "Допускается загрузка только картинок JPG и PNG.";
 }

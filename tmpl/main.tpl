@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>%title%</title>
+    <link rel="icon" href="%address%favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="%address%favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta name="description" content="%meta_desc%" />
     <meta name="keywords" content="%meta_key%" />

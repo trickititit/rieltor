@@ -19,7 +19,7 @@ class ProfilesContent extends Modules {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return "Все пользователи";
     }
 
     protected function getDescription()

@@ -1,7 +1,12 @@
 <html>
 <head>
+    <title>%title%</title>
     <meta charset="utf-8">
+    <meta name="description" content="%meta_desc%" />
+    <meta name="keywords" content="%meta_key%" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="%address%favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="%address%favicon.ico" type="image/x-icon">
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>

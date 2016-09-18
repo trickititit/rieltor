@@ -143,9 +143,10 @@ class Manager {
         $link_ = $this->config->siteAddress."?view=messages";
         $title = $this->data["title"];
         $desc = $this->data["desc"];
+        $short_desc = $this->data["short_desc"];
         $type = $this->data["type"];
         $data = time();
-        $result = $this->adm_message->addMessage(array("title" => $title, "description" => $desc, "type" => $type, "date" => $data));
+        $result = $this->adm_message->addMessage(array("title" => $title, "description" => $desc,"short_desc" => $short_desc, "type" => $type, "date" => $data));
         if ($result)  return $this->returnMessage("SUCCESS_ADD_ADM_MESSAGE", "success", $link_);
         else return $this->unknownError($link_);
     }

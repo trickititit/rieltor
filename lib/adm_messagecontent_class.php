@@ -19,7 +19,7 @@ class AdmMessageContent extends Modules {
 
     protected function getTitle()
     {
-        // TODO: Implement getTitle() method.
+        return "Сообщения";
     }
 
     protected function getDescription()
@@ -54,7 +54,7 @@ class AdmMessageContent extends Modules {
         for ($i = 0; $i < count($this->adm_messages); $i++) {
             $text .= "<li class='col-md-12'>";
             $text .= "<div class=\"round-a-".$this->adm_messages[$i]["type"]."  col-md-12\">
-            <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".$this->adm_messages[$i]["description"]."</div></div> ";
+            <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".htmlspecialchars_decode($this->adm_messages[$i]["description"])."</div></div> ";
             $text .= "</li>";
         }
         return $text;
