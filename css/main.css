@@ -1464,7 +1464,7 @@ h1 {
 }
 
 .round-a-ok{
-    border: solid 1px #008000;
+
     background:#B0F4B0;
     color:#3F3F3F;
     text-align:center;
@@ -1476,7 +1476,7 @@ h1 {
 }
 
 .round-a-warning{
-    border: solid 1px #CC0000;
+
     background:#D64848;
     color:#3F3F3F;
     text-align:center;
@@ -1490,7 +1490,7 @@ h1 {
 }
 
 .round-a-normal{
-    border: solid 1px #606060;
+
     background:#EAEAEA;
     color:#3F3F3F;
     text-align:center;
@@ -1502,7 +1502,7 @@ h1 {
 }
 
 .round-a-attention{
-    border: solid 1px #0808C9;
+
     background:#6F9BF2;
     color: #3F3F3F;
     text-align:center;
@@ -1600,5 +1600,5 @@ h1 {
     text-align:left;
     word-wrap: break-word;
     padding: 10px;
-
+    border-bottom: 1px solid rgba(53,86,129, 0.3);
 }

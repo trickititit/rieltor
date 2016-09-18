@@ -48,18 +48,18 @@ class AdmOneMessageContent extends Modules {
         $sr["title"] = $this->adm_messages["title"];
         $sr["adm_messages"] = htmlspecialchars_decode($this->adm_messages["description"]);
         $sr["type"] = $this->adm_messages["type"];
-        $sr["edit_link"] = $this->config->siteAddress."?view=edit_message&id=".$this->adm_messages["id"];
+        $sr["actions"] = $this->getActions();
         return $this->getReplaceTemplate($sr, "adm_one_message");
     }
-
-    private function getMessagesTable(){
-        $text = "";
-        for ($i = 0; $i < count($this->adm_messages); $i++) {
-            $text .= "<li class='col-md-12'>";
-            $text .= "<div class=\"round-a-".$this->adm_messages[$i]["type"]."  col-md-12\">
-            <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".$this->adm_messages[$i]["description"]."</div></div> ";
-            $text .= "</li>";
+    
+    private function getActions(){
+        if ($this->user_info["access_lvl"] == 2) {
+            $text = "<div class=\"col-md-4\"><a href=\"".$this->config->siteAddress."?view=edit_message&id=".$this->adm_messages["id"]."\"><button  class=\"btn btn-success\">Редактировать</button></a><a href=\"".$this->config->siteAddress."?do=del_adm_message&id=".$this->adm_messages["id"]."\"><button style=\"margin-left: 15px;\" class=\"btn btn-danger\">Удалить</button></a></div><div class='col-md-8'><div class='round-date'>Добавлено: ".$this->formantDate($this->adm_messages["date"])."</div></div>";
+            
+        } else {
+            $text = "<div class='round-date col-md-12'>Добавлено: ".$this->formantDate($this->adm_messages["date"])."</div>";
         }
+        
         return $text;
     }
 
@@ -114,13 +114,22 @@ class AdmOneMessageContent extends Modules {
             $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=reg\">Добавить нового пользователя</a></li>";
             $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=profiles\">Все пользователи</a></li>";
         }
-        $text .= "</ul>
-                    </li>
-                    <li>
-                        <a href=\"#\">Сообщения</a>
-                    </li>";
+        $text .= "</ul></li>";
         if ($this->user_info["access_lvl"] == 2) {
+            $text .= "<li class=\"dropdown active\">
+                        <a class=\"dropdown - toggle\" data-toggle=\"dropdown\" href=\"#\">Сообщения<span class=\"caret\"></span></a>
+                        <ul class=\"dropdown-menu\" >
+                            <li ><a href = \"".$this->config->siteAddress."?view=messages\" >Просмотр сообщений</a ></li >";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=add_message\" >Добавить новое сообщение</a ></li >";
+            $text .= "</ul></li>";
+        } else {
             $text .= "<li class='active'>
+                        <a href=\"".$this->config->siteAddress."?view=messages\">Сообщения</a>
+                        </li >";
+        }
+
+        if ($this->user_info["access_lvl"] == 2) {
+            $text .= "<li>
                         <a href=\"".$this->config->siteAddress."?view=comfort\">Удобства</a>
                     </li>";
         }

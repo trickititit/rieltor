@@ -9,6 +9,7 @@
 require_once "config_class.php";
 require_once "user_class.php";
 require_once "object_class.php";
+require_once "adm_message_class.php";
 
 class doIt {
     private $config;
@@ -17,6 +18,8 @@ class doIt {
     private $object;
     private $user_info;
     private $comfort;
+    private $link;
+    private $adm_messages;
 
 
     public function __construct($db)
@@ -28,6 +31,8 @@ class doIt {
         $this->object = new Object($db);
         $this->user_info =  $this->getUser();
         $this->data = $this->secureData($_REQUEST);
+        $this->adm_messages = new AdmMessage($db);
+        $this->link = $_SERVER["HTTP_REFERER"];
     }
 
     private function getUser(){
@@ -35,6 +40,11 @@ class doIt {
         $password = $_SESSION["password"];
         if ($this->user->checkUser($login, $password)) return $this->user->getUserOnLogin($login);
         else return false;
+    }
+
+    public function redirect($link) {
+        header("Location: $link");
+        exit;
     }
 
     private function secureData($data){
@@ -52,10 +62,27 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_ADD_OBJ_IN_PRE_WORK";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_ADD_OBJ_IN_PRE_WORK";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
+        }
+    }
+
+    public function doDelAdmMessage(){
+        $id = $this->data["id"];
+        $result = $this->adm_messages->delete($id);
+        if ($result) {
+            $_SESSION["message"] = "SUCCESS_DEL_ADM_MESSAGE";
+            $_SESSION["type_message"] = "success";
+            $this->redirect($this->config->siteAddress."?view=messages");
+        }
+        else {
+            $_SESSION["message"] = "FAIL_DEL_ADM_MESSAGE";
+            $_SESSION["type_message"] = "warning";
+            $this->redirect($this->config->siteAddress."?view=messages");
         }
     }
 
@@ -67,10 +94,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_ADD_OBJ_IN_WORK";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_ADD_OBJ_IN_WORK";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 
@@ -80,10 +109,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_CANCEL_IN_WORK";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_CANCEL_IN_WORK";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 
@@ -93,10 +124,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_CANCEL_WORK";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_CANCEL_WORK";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
     
@@ -107,10 +140,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_PRE_DELETE_OBJ";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_PRE_DELETE_OBJ";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 
@@ -128,10 +163,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_DEL_FAV";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_DEL_FAV";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 
@@ -146,10 +183,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_DELETE_COMFORT";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_DELETE_COMFORT";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 
@@ -160,10 +199,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_DELETE_OBJ";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_DELETE_OBJ";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 
@@ -173,10 +214,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_CANCEL_DELETE_OBJ";
             $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
         }
         else {
             $_SESSION["message"] = "FAIL_CANCEL_DELETE_OBJ";
             $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
         }
     }
 

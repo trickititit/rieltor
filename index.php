@@ -48,6 +48,8 @@
                 break;
             case "com_del": $doit->doComDelete();
                 break;
+            case "del_adm_message": $doit->doDelAdmMessage();
+                break;
             default: break;
         }
     }

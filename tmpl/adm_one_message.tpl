@@ -7,4 +7,4 @@
     </div>
 </div>
 <br />
-<a href="%edit_link%"><button class="btn btn-success">Редактировать</button></a>
+<div class="col-md-12">%actions%</div>
