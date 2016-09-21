@@ -60,6 +60,19 @@ class FrontPageContent extends Modules {
             }
             $text .= $this->getReplaceTemplate($sr, "adm_menu");
         }
+        $link = "";
+        $link .= "/?";
+        if (isset($this->data)) {
+            foreach ($this->data as $key => $value) {
+                $link .= $key."=".$value."&";
+            }
+        }
+        $text .= "
+<select onchange=\"window.location.href=this.options[this.selectedIndex].value\" id=\"order\" name=\"order\">
+<option value=\"".$link."order=date\">По дате</option>
+<option value=\"".$link."order=priceup\">Дешевле</option>
+<option value=\"".$link."order=pricedown\">Дороже</option>
+</select>";
         $text .= "</ul>";
         return $text;
     }
@@ -87,6 +100,19 @@ class FrontPageContent extends Modules {
 
     private function getObjectsOnType($user_id) {
         $data = $this->data["typepage"];
+        if ($this->data["order"] == "date") {
+            $order = "date";
+            $up = false;
+        } else if ($this->data["order"] == "pricedown") {
+            $order = "obj_price";
+            $up = false;
+        } else if ($this->data["order"] == "priceup") {
+            $order = "obj_price";
+            $up = true;
+        } else {
+            $order = "date";
+            $up = false;
+        }
         if ($this->data["search"]) {
             $obj = $this->search();
         } else {
@@ -101,7 +127,7 @@ class FrontPageContent extends Modules {
                     break;
                 case "deleted": $obj = $this->object->getDeleted();
                     break;
-                default: $obj = $this->object->getAllOnField("deleted_id", "0","date", false);
+                default: $obj = $this->object->getAllOnField("deleted_id", "0",$order, $up);
             }
         }
         return $obj;
@@ -1014,7 +1040,7 @@ class FrontPageContent extends Modules {
 
             $sr["rieltors"] = $rieltors;
         }
-
+        $sr["script"] = " ";
         $sr["typepage"] = (isset($this->data["typepage"]))? $this->data["typepage"]: "all";
        return $this->getReplaceTemplate($sr, "filter");
     }
@@ -1043,7 +1069,7 @@ class FrontPageContent extends Modules {
                 $city = $this->data["city"];
                 $area = $this->getAreaSearch();
                 $room = $this->getRoom();
-                      $address = $this->data["address"];
+                $address = $this->data["address"];
                 $form = $this->data["formObj_1"];
                 $floor_min = ($this->data["floor_min"] == 1)? 1: $this->data["floor_min"];
                 $floor_max = ($this->data["floor_max"] == 31)? 99999: $this->data["floor_max"];
