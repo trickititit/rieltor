@@ -959,8 +959,8 @@ class FrontPageContent extends Modules {
             $sr["form_obj_1"] = "<option value=\"\">Тип объекта</option>
                         <option value=\"Вторичка\">Вторичка</option>
                         <option value=\"Новостройка\">Новостройка</option>";
-            $sr["price"] = "<input name=\"price_min\" id=\"min-price\" type=\"number\" placeholder=\"от\"><span style=\"float: left;\">-</span>
-                        <input name=\"price_max\" id=\"max-price\" type=\"number\" placeholder=\"до\">";
+            $sr["price"] = "<input value=\"\" name=\"price_min\" id=\"min-price\" type=\"number\" placeholder=\"от\"><span style=\"float: left;\">-</span>
+                        <input value=\"\" name=\"price_max\" id=\"max-price\" type=\"number\" placeholder=\"до\">";
             $sr["slider-range-square_1_values"] = "values: [ 10, 200 ],";
             $sr["amount-square"] = "<input type=\"number\" id=\"amount-square_min\" readonly name=\"square_1_min\" hidden>
                     <input type=\"number\" id=\"amount-square_max\" readonly name=\"square_1_max\" hidden>";
@@ -1037,7 +1037,7 @@ class FrontPageContent extends Modules {
     private function search() {
         $type = $this->data["type"];
         switch ($type) {
-            case "1": $square_min = ($this->data["square_1_min"] == 10)? 0: $this->data["square_1_min"];
+            case "1": $square_min = ($this->data["square_1_min"] == 10)? 1: $this->data["square_1_min"];
                 $deal = $this->data["typedeal"];
                 $square_max = ($this->data["square_1_max"] == 200)? 99999999: $this->data["square_1_max"];
                 $city = $this->data["city"];
@@ -1045,13 +1045,13 @@ class FrontPageContent extends Modules {
                 $room = $this->getRoom();
                       $address = $this->data["address"];
                 $form = $this->data["formObj_1"];
-                $floor_min = ($this->data["floor_min"] == 1)? 0: $this->data["floor_min"];
+                $floor_min = ($this->data["floor_min"] == 1)? 1: $this->data["floor_min"];
                 $floor_max = ($this->data["floor_max"] == 31)? 99999: $this->data["floor_max"];
-                $floorInObj_min = ($this->data["floorInObj_1_min"] == 1)? 0: $this->data["floorInObj_1_min"];
+                $floorInObj_min = ($this->data["floorInObj_1_min"] == 1)? 1: $this->data["floorInObj_1_min"];
                 $floorInObj_max = ($this->data["floorInObj_1_max"] == 31)? 999: $this->data["floorInObj_1_max"];
                 $typeHouse = $this->getTypeHouse_1();
-                $price_min = (isset($this->data["price_min"]))? $this->data["price_min"]: "0";
-                $price_max = (isset($this->data["price_max"]))? $this->data["price_max"]: "999999999999999999999999";
+                $price_min = ($this->data["price_min"]== 0)? 1: $this->data["price_min"];
+                $price_max = ($this->data["price_max"]== 0)? 999999999: $this->data["price_max"];
                 switch ($this->data["typepage"]) {
                     case "my": $field = "created_id";
                         $value = $this->user_info["id"];
@@ -1086,16 +1086,16 @@ class FrontPageContent extends Modules {
                 $deal = $this->data["typedeal"];
                 $form = $this->getFormObj();
                 $address = $this->data["address"];
-                $square_min = ($this->data["square_2_min"] == 10)? 0: $this->data["square_2_min"];
+                $square_min = ($this->data["square_2_min"] == 10)? 1: $this->data["square_2_min"];
                 $square_max = ($this->data["square_2_max"] == 500)? 999999999: $this->data["square_2_max"];
-                $square_earth_min = ($this->data["square_earth_min"] == 1)? 0: $this->data["square_earth_min"];
+                $square_earth_min = ($this->data["square_earth_min"] == 1)? 1: $this->data["square_earth_min"];
                 $square_earth_max = ($this->data["square_earth_max"] == 100)? 9999: $this->data["square_earth_max"];
-                $floorInObj_min = ($this->data["floorInObj_2_min"] == 1)? 0: $this->data["floorInObj_2_min"];
+                $floorInObj_min = ($this->data["floorInObj_2_min"] == 1)? 1: $this->data["floorInObj_2_min"];
                 $floorInObj_max = ($this->data["floorInObj_2_max"] == 5)? 99999: $this->data["floorInObj_2_max"];
-                $distance_min = ($this->data["distance_min"] == 0)? 0: $this->data["distance_min"];
+                $distance_min = ($this->data["distance_min"] == 0)? -1: $this->data["distance_min"];
                 $distance_max = ($this->data["distance_max"] == 100)? 99999: $this->data["distance_max"];
-                $price_min = (isset($this->data["price_min"]))? $this->data["price_min"]: "0";
-                $price_max = (isset($this->data["price_max"]))? $this->data["price_max"]: "999999999999999999999999";
+                $price_min = ($this->data["price_min"]== 0)? 1: $this->data["price_min"];
+                $price_max = ($this->data["price_max"]== 0)? 999999999: $this->data["price_max"];
                 $typeHouse = $this->getTypeHouse_2();
                 switch ($this->data["typepage"]) {
                     case "my": $field = "created_id";
@@ -1127,7 +1127,7 @@ class FrontPageContent extends Modules {
                 }
                 break;
             case "3":
-                $square_min = ($this->data["square_1_min"] == 10)? 0: $this->data["square_1_min"];
+                $square_min = ($this->data["square_1_min"] == 10)? 1: $this->data["square_1_min"];
                 $deal = $this->data["typedeal"];
                 $square_max = ($this->data["square_1_max"] == 200)? 99999999: $this->data["square_1_max"];
                 $city = $this->data["city"];
@@ -1135,13 +1135,13 @@ class FrontPageContent extends Modules {
                 $area = $this->getAreaSearch();
                 $room = $this->getRoom();
                 $form = $this->data["formObj_3"];
-                $floor_min = ($this->data["floor_min"] == 1)? 0: $this->data["floor_min"];
+                $floor_min = ($this->data["floor_min"] == 1)? 1: $this->data["floor_min"];
                 $floor_max = ($this->data["floor_max"] == 31)? 99999: $this->data["floor_max"];
-                $floorInObj_min = ($this->data["floorInObj_1_min"] == 1)? 0: $this->data["floorInObj_1_min"];
+                $floorInObj_min = ($this->data["floorInObj_1_min"] == 1)? 1: $this->data["floorInObj_1_min"];
                 $floorInObj_max = ($this->data["floorInObj_1_max"] == 31)? 999: $this->data["floorInObj_1_max"];
                 $typeHouse = $this->getTypeHouse_1();
-                $price_min = (isset($this->data["price_min"]))? $this->data["price_min"]: "0";
-                $price_max = (isset($this->data["price_max"]))? $this->data["price_max"]: "999999999999999999999999";
+                $price_min = ($this->data["price_min"]== 0)? 1: $this->data["price_min"];
+                $price_max = ($this->data["price_max"]== 0)? 999999999: $this->data["price_max"];
                 switch ($this->data["typepage"]) {
                     case "my": $field = "created_id";
                         $value = $this->user_info["id"];

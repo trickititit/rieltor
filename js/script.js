@@ -137,6 +137,54 @@ $(document).ready(function() {
                 $('#myModal').css('overflow', 'hidden');
                 $('body').css('overflow', 'auto'); // включаем скролл
         });
+
+    $('#area_1_search :checkbox').change(function(){
+        var checkCount = $ ('#area_1_search :checkbox:checked').length;
+        if($(this).is(":checked")) {
+            if (checkCount > 1) {
+                result_ = "Район (" + checkCount + ")";
+            } else if  (checkCount == 0) {
+                result_ = "Район";
+            } else {
+                result_ = $(this).val();
+            }
+            $('#amount-area_1').val(result_);
+
+        } else {
+            if (checkCount > 1) {
+                result_ = "Район (" + checkCount + ")";
+            } else if  (checkCount == 0) {
+                var result_ = "Район";
+            } else {
+                result_ = $ ('#area_1_search :checkbox:checked').val();
+            }
+            $('#amount-area_1').val(result_);
+        }
+    });
+
+    $('#area_2_search :checkbox').change(function(){
+        var checkCount = $ ('#area_2_search :checkbox:checked').length;
+        if($(this).is(":checked")) {
+            if (checkCount > 1) {
+                result_ = "Район (" + checkCount + ")";
+            } else if  (checkCount == 0) {
+                result_ = "Район";
+            } else {
+                result_ = $(this).val();
+            }
+            $('#amount-area_2').val(result_);
+
+        } else {
+            if (checkCount > 1) {
+                result_ = "Район (" + checkCount + ")";
+            } else if  (checkCount == 0) {
+                var result_ = "Район";
+            } else {
+                result_ = $ ('#area_2_search :checkbox:checked').val();
+            }
+            $('#amount-area_2').val(result_);
+        }
+    });
     
 
     $('#typeHouse_1_search :checkbox').change(function(){

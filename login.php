@@ -20,8 +20,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Авторизация</title>
-    <meta name="keywords" content="web magisters курсы веб-дизайн создание сайтов обучение">
-    <meta name="description" content="Каталог онлайн-курсов по современным профессиям. Получи профессию самостоятельно и построй карьеру своей мечты.">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
 
     <link href="<?echo $address?>css/build.css" rel="stylesheet">
     <link rel="stylesheet" href="%address%css/animate.css" type="text/css">

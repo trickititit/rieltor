@@ -122,23 +122,52 @@
                     max: 31,
                     %slider-range-floor_values%
                     slide: function( event, ui ) {
-                        $( "#amount-floor_min" ).val(ui.values[ 0 ]);
-                        $( "#amount-floor_max" ).val(ui.values[ 1 ]);
-                        var lastVar1 = ((ui.values[ 0 ]) == 31)? "31+": (ui.values[ 0 ]);
-                        var lastVar2 = ((ui.values[ 1 ]) == 31)? "31+": (ui.values[ 1 ]);
-                        $( "#amount-floor" ).val((lastVar1 == lastVar2)?lastVar2 + " этаж": lastVar1 + " - " + lastVar2 + " этаж");
+
+                        var lastVar1 = ui.values[0];
+                        var lastVar2 = ui.values[1];
+                        $("#amount-floor_min").val(lastVar1);
+                        $("#amount-floor_max").val(lastVar2);
+                        if (lastVar1 == 31) {
+                            lastVar1 = "31+";
+                        }
+                        if (lastVar2 == 31) {
+                            lastVar2 = "31+";
+                        }
+                        var resultat = "";
+                        if (lastVar1 == lastVar2) {
+                            resultat = lastVar2 + " этаж";
+                        } else if ((lastVar1 == 1) && (lastVar2 == "31+")) {
+                            resultat = "Этаж";
+                        } else {
+                            resultat = lastVar1 + " - " + lastVar2 + " этаж";
+                        }
+                        $("#amount-floor").val(resultat);
                         $("#slider-range-floor .ui-slider-handle").first().text(lastVar1);
                         $("#slider-range-floor .ui-slider-handle").last().text(lastVar2);
                     }
                 });
-                $( "#amount-floor_min" ).val($( "#slider-range-floor" ).slider( "values", 0 ));
-                $( "#amount-floor_max" ).val($( "#slider-range-floor" ).slider( "values", 1 ));
-                var lastVar1_1 = (($( "#slider-range-floor" ).slider( "values", 0 )) == 31)? "31+": ($( "#slider-range-floor" ).slider( "values", 0 ));
-                var lastVar2_1 = (($( "#slider-range-floor" ).slider( "values", 1 )) == 31)? "31+": ($( "#slider-range-floor" ).slider( "values", 1 ));
-                $( "#amount-floor" ).val((lastVar1_1 == lastVar2_1)?lastVar2_1 + " этаж": lastVar1_1 + " - " + lastVar2_1 + " этаж");
+                var lastVar1_1 = $( "#slider-range-floor" ).slider( "values", 0 );
+                var lastVar2_1 = $( "#slider-range-floor" ).slider( "values", 1 );
+                $( "#amount-floor_min" ).val(lastVar1_1);
+                $( "#amount-floor_max" ).val(lastVar2_1);
+
+                if (lastVar1_1 == 31) {
+                    lastVar1_1 = "31+";
+                }
+                if (lastVar2_1 == 31) {
+                    lastVar2_1 = "31+";
+                }
+                var resultat2 = "";
+                if (lastVar1_1 == lastVar2_1) {
+                    resultat2 = lastVar2_1 + " этаж";
+                } else if ((lastVar1_1 == 1) && (lastVar2_1 == "31+")) {
+                    resultat2 = "Этаж";
+                } else {
+                    resultat2 = lastVar1_1 + " - " + lastVar2_1 + " этаж";
+                }
+                $( "#amount-floor" ).val(resultat2);
                 $("#slider-range-floor .ui-slider-handle").first().text(lastVar1_1);
                 $("#slider-range-floor .ui-slider-handle").last().text(lastVar2_1);
-
 
                 $( "#slider-range-floorInObj_1" ).slider({
                     range: true,
@@ -146,43 +175,102 @@
                     max: 31,
                     %slider-range-floorInObj_1_values%
                     slide: function( event, ui ) {
-                        $( "#amount-floorInObj_1_min" ).val(ui.values[ 0 ]);
-                        $( "#amount-floorInObj_1_max" ).val(ui.values[ 1 ]);
-                        var lastVar1 = ((ui.values[ 0 ]) == 31)? "31+": (ui.values[ 0 ]);
-                        var lastVar2 = ((ui.values[ 1 ]) == 31)? "31+": (ui.values[ 1 ]);
-                        $( "#amount-floorInObj_1" ).val((lastVar1 == lastVar2)?lastVar2 + " этаж": lastVar1 + " - " + lastVar2 + " этаж");
+                        var lastVar1 = ui.values[0];
+                        var lastVar2 = ui.values[1];
+                        $("#amount-floorInObj_1_min").val(lastVar1);
+                        $("#amount-floorInObj_1_max").val(lastVar2);
+                        if (lastVar1 == 31) {
+                            lastVar1 = "31+";
+                        }
+                        if (lastVar2 == 31) {
+                            lastVar2 = "31+";
+                        }
+                        var resultat = "";
+                        if (lastVar1 == lastVar2) {
+                            resultat = lastVar2 + " этажей";
+                        } else if ((lastVar1 == 1) && (lastVar2 == "31+")) {
+                            resultat = "Этажей в доме";
+                        } else {
+                            resultat = lastVar1 + " - " + lastVar2 + " этажей";
+                        }
+                        $("#amount-floorInObj_1").val(resultat);
                         $("#slider-range-floorInObj_1 .ui-slider-handle").first().text(lastVar1);
                         $("#slider-range-floorInObj_1 .ui-slider-handle").last().text(lastVar2);
                     }
                 });
-                $( "#amount-floorInObj_1_min" ).val($( "#slider-range-floorInObj_1" ).slider( "values", 0 ));
-                $( "#amount-floorInObj_1_max" ).val($( "#slider-range-floorInObj_1" ).slider( "values", 1 ));
-                var lastVar1_1 = (($( "#slider-range-floorInObj_1" ).slider( "values", 0 )) == 31)? "31+": ($( "#slider-range-floorInObj_1" ).slider( "values", 0 ));
-                var lastVar2_1 = (($( "#slider-range-floorInObj_1" ).slider( "values", 1 )) == 31)? "31+": ($( "#slider-range-floorInObj_1" ).slider( "values", 1 ));
-                $( "#amount-floorInObj_1" ).val((lastVar1_1 == lastVar2_1)?lastVar2_1 + " этаж": lastVar1_1 + " - " + lastVar2_1 + " этаж");
+                var lastVar1_1 = $( "#slider-range-floorInObj_1" ).slider( "values", 0 );
+                var lastVar2_1 = $( "#slider-range-floorInObj_1" ).slider( "values", 1 );
+                $( "#amount-floorInObj_1_min" ).val(lastVar1_1);
+                $( "#amount-floorInObj_1_max" ).val(lastVar2_1);
+
+                if (lastVar1_1 == 31) {
+                    lastVar1_1 = "31+";
+                }
+                if (lastVar2_1 == 31) {
+                    lastVar2_1 = "31+";
+                }
+                var resultat2 = "";
+                if (lastVar1_1 == lastVar2_1) {
+                    resultat2 = lastVar2_1 + " этажей";
+                } else if ((lastVar1_1 == 1) && (lastVar2_1 == "31+")) {
+                    resultat2 = "Этажей в доме";
+                } else {
+                    resultat2 = lastVar1_1 + " - " + lastVar2_1 + " этажей";
+                }
+                $( "#amount-floorInObj_1" ).val(resultat2);
                 $("#slider-range-floorInObj_1 .ui-slider-handle").first().text(lastVar1_1);
                 $("#slider-range-floorInObj_1 .ui-slider-handle").last().text(lastVar2_1);
 
-                $( "#slider-range-floorInObj_2" ).slider({
+
+        $( "#slider-range-floorInObj_2" ).slider({
                     range: true,
                     min: 1,
                     max: 5,
                     %slider-range-floorInObj_2_values%
                     slide: function( event, ui ) {
-                        $( "#amount-floorInObj_2_min" ).val(ui.values[ 0 ]);
-                        $( "#amount-floorInObj_2_max" ).val(ui.values[ 1 ]);
-                        var lastVar1 = ((ui.values[ 0 ]) == 5)? "5+": (ui.values[ 0 ]);
-                        var lastVar2 = ((ui.values[ 1 ]) == 5)? "5+": (ui.values[ 1 ]);
-                        $( "#amount-floorInObj_2" ).val((lastVar1 == lastVar2)?lastVar2 + " этаж": lastVar1 + " - " + lastVar2 + " этаж");
+                        var lastVar1 = ui.values[0];
+                        var lastVar2 = ui.values[1];
+                        $("#amount-floorInObj_2_min").val(lastVar1);
+                        $("#amount-floorInObj_2_max").val(lastVar2);
+                        if (lastVar1 == 5) {
+                            lastVar1 = "5+";
+                        }
+                        if (lastVar2 == 5) {
+                            lastVar2 = "5+";
+                        }
+                        var resultat = "";
+                        if (lastVar1 == lastVar2) {
+                            resultat = lastVar2 + " этажей";
+                        } else if ((lastVar1 == 1) && (lastVar2 == "5+")) {
+                            resultat = "Этажей в доме";
+                        } else {
+                            resultat = lastVar1 + " - " + lastVar2 + " этажей";
+                        }
+                        $("#amount-floorInObj_2").val(resultat);
                         $("#slider-range-floorInObj_2 .ui-slider-handle").first().text(lastVar1);
                         $("#slider-range-floorInObj_2 .ui-slider-handle").last().text(lastVar2);
                     }
                 });
-                $( "#amount-floorInObj_2_min" ).val($( "#slider-range-floorInObj_2" ).slider( "values", 0 ));
-                $( "#amount-floorInObj_2_max" ).val($( "#slider-range-floorInObj_2" ).slider( "values", 1 ));
-                var lastVar1_1 = (($( "#slider-range-floorInObj_2" ).slider( "values", 0 )) == 5)? "5+": ($( "#slider-range-floorInObj_2" ).slider( "values", 0 ));
-                var lastVar2_1 = (($( "#slider-range-floorInObj_2" ).slider( "values", 1 )) == 5)? "5+": ($( "#slider-range-floorInObj_2" ).slider( "values", 1 ));
-                $( "#amount-floorInObj_2" ).val((lastVar1_1 == lastVar2_1)?lastVar2_1 + " этаж": lastVar1_1 + " - " + lastVar2_1 + " этаж");
+                var lastVar1_1 = $( "#slider-range-floorInObj_2" ).slider( "values", 0 );
+                var lastVar2_1 = $( "#slider-range-floorInObj_2" ).slider( "values", 1 );
+                $( "#amount-floorInObj_2_min" ).val(lastVar1_1);
+                $( "#amount-floorInObj_2_max" ).val(lastVar2_1);
+
+                if (lastVar1_1 == 5) {
+                    lastVar1_1 = "5+";
+                }
+                if (lastVar2_1 == 5) {
+                    lastVar2_1 = "5+";
+                }
+                var resultat2 = "";
+                if (lastVar1_1 == lastVar2_1) {
+                    resultat2 = lastVar2_1 + " этажей";
+                } else if ((lastVar1_1 == 1) && (lastVar2_1 == "5+")) {
+                    resultat2 = "Этажей в доме";
+                } else {
+                    resultat2 = lastVar1_1 + " - " + lastVar2_1 + " этажей";
+                }
+                $( "#amount-floorInObj_2" ).val(resultat2);
                 $("#slider-range-floorInObj_2 .ui-slider-handle").first().text(lastVar1_1);
                 $("#slider-range-floorInObj_2 .ui-slider-handle").last().text(lastVar2_1);
 
