@@ -59,10 +59,16 @@ class ViewObjContent extends ModulesContent {
                     zoom: 16,
                     behaviors: ['default']
 
-                        }),                            
+                        }),
+                                                    
                      _point = new ymaps.Placemark([".$this->objects["obj_geo"]."], {
                 balloonContentBody: \"".$this->objects["obj_address"]."\"
+                
                     });
+                    myMap.controls.add(
+                new ymaps.control.ZoomControl()
+        );
+        myMap.controls.add('typeSelector')
                     myMap.geoObjects.add(_point);});";
         return $this->getReplaceTemplate($sr, "view_obj");
     }

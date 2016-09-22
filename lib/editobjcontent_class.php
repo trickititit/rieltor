@@ -171,9 +171,14 @@ class EditObjContent extends Modules {
                     behaviors: ['default']
 
                         }),
-                    searchControl = new SearchAddress(myMap, $('form'));        
+                    searchControl = new SearchAddress(myMap, $('form'));
+                            myMap.controls.add(
+                new ymaps.control.ZoomControl()
+        );
+        myMap.controls.add('typeSelector'),
                      _point = new ymaps.Placemark([".$this->obj["obj_geo"]."], {
                 balloonContentBody: \"".$this->obj["obj_address"]."\"
+                
                     });
                     myMap.geoObjects.add(_point);});";
 

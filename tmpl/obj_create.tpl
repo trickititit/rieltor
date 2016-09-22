@@ -513,6 +513,10 @@
                     behaviors: ['default']
                 }),
                 searchControl = new SearchAddress(myMap, $('form'));
+        myMap.controls.add(
+                new ymaps.control.ZoomControl()
+        );
+        myMap.controls.add('typeSelector')
     });
 </script>
 <style type="text/css">
