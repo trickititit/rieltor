@@ -98,7 +98,7 @@ class FrontPageContent extends Modules {
     
     protected function getBottom()
     {
-        if ($this->data["search"]) {
+        if ($this->data["search"] || $this->data["order"]) {
             $new_link = $this->config->siteAddress. "?";
             foreach ($this->data as $key => $value) {
                 if($key != "page"){
