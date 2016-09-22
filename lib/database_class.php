@@ -232,7 +232,7 @@ class DataBase {
         if ($this->mysqli) $this->mysqli->close();
     }
 
-    public function searchObj($table_name, $fieldsandvalues) {
+    public function searchObj($table_name, $fieldsandvalues, $order, $up) {
         $where = "";
         $con = 0;
         foreach ($fieldsandvalues as $key => $values) {
@@ -268,7 +268,7 @@ class DataBase {
             }            
             $con ++;
         }
-        $result = $this->select($table_name, array("*"), $where);
+        $result = $this->select($table_name, array("*"), $where, $order, $up);
         return $result;
 }
     

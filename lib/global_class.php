@@ -111,8 +111,8 @@ abstract class GlobalClass {
         return $this->db->getLastID($this->table_name);
     }
     
-    public function search($fieldsandvalues) {
-        return $this->db->searchObj($this->table_name, $fieldsandvalues);
+    public function search($fieldsandvalues, $order = "date", $up = false) {
+        return $this->db->searchObj($this->table_name, $fieldsandvalues, $order, $up);
     }
     
     

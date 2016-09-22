@@ -64,14 +64,27 @@ class FrontPageContent extends Modules {
         $link .= "/?";
         if (isset($this->data)) {
             foreach ($this->data as $key => $value) {
+                if ($key == "order") {
+                    continue;
+                }
                 $link .= $key."=".$value."&";
+            }
+        }
+        $values = array($link."order=date", $link."order=priceup", $link."order=pricedown");
+        $valuess = array("date","priceup","pricedown");
+        $val = array();
+        for ($i = 0; $i < 3; $i++) {
+            if ($this->data["order"] == $valuess[$i]) {
+                $val[$i] = "value=\"$values[$i]\" selected";
+            } else {
+                $val[$i] = "value=\"".$values[$i]."\"";
             }
         }
         $text .= "
 <select onchange=\"window.location.href=this.options[this.selectedIndex].value\" id=\"order\" name=\"order\">
-<option value=\"".$link."order=date\">По дате</option>
-<option value=\"".$link."order=priceup\">Дешевле</option>
-<option value=\"".$link."order=pricedown\">Дороже</option>
+<option ".$val[0].">По дате</option>
+<option ".$val[1].">Дешевле</option>
+<option ".$val[2].">Дороже</option>
 </select>";
         $text .= "</ul>";
         return $text;
@@ -104,14 +117,14 @@ class FrontPageContent extends Modules {
             $order = "date";
             $up = false;
         } else if ($this->data["order"] == "pricedown") {
-            $order = "obj_price";
-            $up = false;
+            $this->object->order = "obj_price";
+            $this->object->up = false;
         } else if ($this->data["order"] == "priceup") {
-            $order = "obj_price";
-            $up = true;
+            $this->object->order = "obj_price";
+            $this->object->up = true;
         } else {
-            $order = "date";
-            $up = false;
+            $this->object->order = "date";
+            $this->object->up = false;
         }
         if ($this->data["search"]) {
             $obj = $this->search();
@@ -127,7 +140,7 @@ class FrontPageContent extends Modules {
                     break;
                 case "deleted": $obj = $this->object->getDeleted();
                     break;
-                default: $obj = $this->object->getAllOnField("deleted_id", "0",$order, $up);
+                default: $obj = $this->object->getAllOnField_("deleted_id", "0");
             }
         }
         return $obj;
