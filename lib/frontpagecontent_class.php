@@ -108,7 +108,8 @@ class FrontPageContent extends Modules {
             $new_link = substr($new_link, 0, -1);
             $this->link = $new_link;
         }
-        return $this->getPagination(count($this->objects), $this->config->count_obj, $this->link);
+        $page = (isset($this->data["page"]))? $this->data["page"]:1;
+        return $this->getPagination(count($this->objects), $this->config->count_obj, $this->link, $page);
     }
 
     private function getObjectsOnType($user_id) {
@@ -1041,7 +1042,7 @@ class FrontPageContent extends Modules {
                         <label><input type=\"checkbox\" value=\"Блочный\" name=\"typeHouse_1-3\" id=\"typeHouse_1-3\">Блочный</label>
                         <label><input type=\"checkbox\" value=\"Монолитный\" name=\"typeHouse_1-4\" id=\"typeHouse_1-4\">Монолитный</label>
                         <label><input type=\"checkbox\" value=\"Деревянный\" name=\"typeHouse_1-5\" id=\"typeHouse_1-5\">Деревянный</label>";
-
+            $sr["script"] = " ";
             $rieltors = "";
             if ($this->data["typepage"] == "all" || $this->data["typepage"] == ""){
                 $rieltors .= "<select id=\"rieltors\" name=\"rieltor\"><option value=\"\">Риелтор</option>";
@@ -1053,7 +1054,6 @@ class FrontPageContent extends Modules {
 
             $sr["rieltors"] = $rieltors;
         }
-        $sr["script"] = " ";
         $sr["typepage"] = (isset($this->data["typepage"]))? $this->data["typepage"]: "all";
        return $this->getReplaceTemplate($sr, "filter");
     }

@@ -1,1 +1,1 @@
-<a href="%link%">%number%</a>
+<li class="%active%"><a href="%link%">%number%</a></li>

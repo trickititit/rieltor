@@ -101,13 +101,21 @@ abstract class Modules {
         return $data;
     }
 
-    protected function getPagination($count, $count_on_page, $link){
+    protected function getPagination($count, $count_on_page, $link, $page){
         $count_on_pages = ceil($count / $count_on_page);
         $sr["number"] = 1;
         $sr["link"] = $link;
+        if ($page == 1) {
+            $sr["active"] = "active";
+        }
         $pages = $this->getReplaceTemplate($sr, "number_page");
         $sym = (strpos($link, "?") !== false)? "&amp;": "?";
         for ($i = 2; $i <= $count_on_pages; $i++) {
+            if ($i == $page) {
+                $sr["active"] = "active";
+            } else {
+                $sr["active"] = "";
+            }
             $sr["number"] = $i;
             $sr["link"] = $link.$sym."page=$i";
             $pages .= $this->getReplaceTemplate($sr, "number_page");

@@ -1464,12 +1464,13 @@ h1 {
 }
 
 .round-a-ok{
-
-    background:#B0F4B0;
+    background: #fff url("../modal/resources/images/success.png") left 15px bottom 15px no-repeat;
     color:#3F3F3F;
     text-align:center;
-    border-radius: 5px;
     word-wrap: break-word;
+    border: 1px solid #e5e5e5;
+    min-height: 250px;
+    margin-top: 20px;
 }
 .round-a-ok div{
     padding:4px;
@@ -1477,10 +1478,12 @@ h1 {
 
 .round-a-warning{
 
-    background:#D64848;
+    background: #fff url("../modal/resources/images/error.png") left 15px bottom 15px no-repeat;
     color:#3F3F3F;
     text-align:center;
-    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    min-height: 250px;
+    margin-top: 20px;
     word-wrap: break-word;
 
 
@@ -1491,10 +1494,12 @@ h1 {
 
 .round-a-normal{
 
-    background:#EAEAEA;
+    background: #fff;
     color:#3F3F3F;
     text-align:center;
-    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    min-height: 250px;
+    margin-top: 20px;
     word-wrap: break-word;
 }
 .round-a-normal div{
@@ -1503,10 +1508,12 @@ h1 {
 
 .round-a-attention{
 
-    background:#6F9BF2;
+    background: #fff url("../modal/resources/images/notice.png") left 15px bottom 15px no-repeat;
     color: #3F3F3F;
     text-align:center;
-    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    min-height: 250px;
+    margin-top: 20px;
     word-wrap: break-word;
 
 }
@@ -1608,4 +1615,18 @@ h1 {
 #order {
     float: right;
     margin-top: 5px;
+}
+
+.block-a {
+    padding-right: 30px!important;
+    padding-bottom: 10px!important;
+    position: absolute;
+    bottom: 0;
+}
+.centovka {
+    display: block;
+    margin: auto;
+}
+.pagina {
+    margin-top: 20px;
 }

@@ -57,10 +57,10 @@ class AdmMessageContent extends Modules {
         $end = (count($this->adm_messages) > $start + $this->count_on_page)? $start + $this->count_on_page: count($this->adm_messages);
         $text = "";
         for ($i = $start; $i < $end; $i++) {
-            $text .= "<li class='col-md-12'>";
+            $text .= "<div class='col-md-12'>";
             $text .= "<div class=\"round-a-".$this->adm_messages[$i]["type"]."  col-md-12\">
             <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>Добавлено: ".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".htmlspecialchars_decode($this->adm_messages[$i]["short_desc"])."</div> ";
-            $text .= "<div class='col-md-12'><a href=\"".$this->config->siteAddress."?view=one_message&id=".$this->adm_messages[$i]["id"]."\"><button class=\"btn btn-default\" style='float: right' >Подробнее</button></a></div></div></li>";
+            $text .= "<div class='col-md-12 block-a'><a href=\"".$this->config->siteAddress."?view=one_message&id=".$this->adm_messages[$i]["id"]."\"><button class=\"btn btn-default\" style='float: right' >Подробнее</button></a></div></div></div>";
         }
         return $text;
     }
@@ -71,7 +71,8 @@ class AdmMessageContent extends Modules {
 
     protected function getBottom()
     {
-        return $this->getPagination(count($this->adm_messages), $this->count_on_page, $this->config->siteAddress."?view=messages");
+        $page = (isset($this->data["page"]))? $this->data["page"]:1;
+        return $this->getPagination(count($this->adm_messages), $this->count_on_page, $this->config->siteAddress."?view=messages", $page);
     }
 
     protected function getNavMenu()
