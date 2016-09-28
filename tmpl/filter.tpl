@@ -22,12 +22,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <label id="photo"><table><tr><td><input type="checkbox" name="photo" /></td><td id="label_checkbox">только с фото</td></tr></table></label>
-                    %rieltors%
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-12 dop_select">
                     <select id="typedeal" name="typedeal">
                         %typedeal%
@@ -66,6 +60,7 @@
                     <div id="square_earth_search" hidden>
                         <div id="slider-range-square_earth"></div>
                     </div>
+                    %rieltors%
         </div>
         </div>
         <div class="row">
@@ -106,6 +101,7 @@
                     <div id="price_search" hidden>
                         %price%
                     </div>
+                <label id="photo"><table><tr><td><input type="checkbox" name="photo" /></td><td id="label_checkbox">только с фото</td></tr></table></label>
             </div>
         </div>
         <input type="text" hidden name="typepage" readonly value="%typepage%">

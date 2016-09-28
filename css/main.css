@@ -856,10 +856,11 @@ h1 {
     background: #20A64F;
     border-radius: 3px;
     padding: 3px;
+    margin-bottom: 10px;
 }
 
 #filter {
-    height: 150px;
+    height: 130px;
     margin: 15px 0;
     padding: 0 15px;
     background: #ECECEC;
@@ -881,6 +882,10 @@ h1 {
 
 #filter input:hover {
     opacity: 1;
+}
+
+.dop_select {
+    margin-top: 3px;
 }
 
 .dop_select select {
@@ -908,7 +913,6 @@ h1 {
 
 #rieltors {
     margin: 3px;
-    margin-top: 10px;
     width: 200px;
     height: 25px;
     border-radius: 3px;
