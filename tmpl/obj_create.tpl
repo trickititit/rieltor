@@ -459,7 +459,7 @@
         acceptedFiles: "image/*",
         maxFilesize: 100,
         addRemoveLinks: true,
-        maxFiles: 15,
+        maxFiles: 20,
         removedfile: function(file) {
             var id = $('#obj-id').val();
             var name = file.name;

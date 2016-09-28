@@ -148,7 +148,7 @@ class FrontPageContent extends Modules {
     }
 
     private function formantDate($time) {
-        return date("m-d H:i", $time);
+        return date("d.m.Y", $time);
     }
 
     private function getTable() {
@@ -170,6 +170,7 @@ class FrontPageContent extends Modules {
                     $sr["obj_title"] = ($this->objects[$i]["obj_rooms"] == "Студия")?$this->objects[$i]["obj_rooms"]." квартира": $this->objects[$i]["obj_rooms"]."-к квартира";
                     $sr["obj_address"] = $this->objects[$i]["obj_city"].", ".$this->objects[$i]["obj_area"].", ".$this->objects[$i]["obj_address"];
                     $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
+                    $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
                     $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
@@ -184,6 +185,7 @@ class FrontPageContent extends Modules {
                     $sr["obj_title"] = $this->objects[$i]["obj_type"];
                     $sr["obj_address"] = $this->objects[$i]["obj_city"].", ".$this->objects[$i]["obj_area"].", ".$this->objects[$i]["obj_address"];
                     $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
+                    $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
                     $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
@@ -198,6 +200,7 @@ class FrontPageContent extends Modules {
                     $sr["obj_title"] = "Комната в ".$this->objects[$i]["obj_rooms"]."-к";
                     $sr["obj_address"] = $this->objects[$i]["obj_city"].", ".$this->objects[$i]["obj_area"].", ".$this->objects[$i]["obj_address"];
                     $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
+                    $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
                     $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";

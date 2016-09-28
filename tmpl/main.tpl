@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="description" content="%meta_desc%" />
     <meta name="keywords" content="%meta_key%" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
     <script src="//yandex.st/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
