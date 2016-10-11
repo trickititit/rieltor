@@ -163,6 +163,10 @@ class DataBase {
         return $this->select($table_name, array("*"), "`$field_on` = '".addslashes($value_on)."' AND `$field_off` = '".addslashes($value_off)."'", $order, $up);
     }
 
+    public function getAllOnFieldAndFieldAndField($table_name, $field_on, $value_on, $field_off, $value_off, $field, $value, $order, $up){
+        return $this->select($table_name, array("*"), "`$field_on` = '".addslashes($value_on)."' AND `$field_off` = '".addslashes($value_off)."' AND `$field` = '".addslashes($value)."'", $order, $up);
+    }
+
     // конец get Объект
 
     //get количество
@@ -179,6 +183,11 @@ class DataBase {
 
     public function getCountOnFieldAndOnField ($table_name, $field_on, $value_on, $field_off, $value_off) {
         $data = $this->select($table_name, array("COUNT(*)"), "`$field_on` = '".addslashes($value_on)."' AND `$field_off` = '".addslashes($value_off)."'");
+        return $data[0]["COUNT(*)"];
+    }
+
+    public function getCountOnFieldAndOnFieldAndField ($table_name, $field_on, $value_on, $field_off, $value_off, $field_one, $value_one) {
+        $data = $this->select($table_name, array("COUNT(*)"), "`$field_on` = '".addslashes($value_on)."' AND `$field_off` = '".addslashes($value_off)."' AND `$field_one` = '".addslashes($value_one)."'");
         return $data[0]["COUNT(*)"];
     }
 

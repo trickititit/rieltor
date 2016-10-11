@@ -71,9 +71,12 @@ abstract class GlobalClass {
     public function getAllOnNoField($field, $value, $order = "", $up = true){
         return $this->db->getAllNoField($this->table_name, $field, $value, $order, $up);
     }
-
     public function getAllOnFieldAndField($field_on, $value_on, $field_off, $value_off, $order="", $up = true) {
         return $this->db->getAllOnFieldAndField($this->table_name, $field_on, $value_on, $field_off, $value_off, $order, $up);
+    }
+
+    public function getAllOnFieldAndFieldAndField($field_on, $value_on, $field_off, $value_off, $field, $value, $order="", $up = true) {
+        return $this->db->getAllOnFieldAndFieldAndField($this->table_name, $field_on, $value_on, $field_off, $value_off, $field, $value, $order, $up);
     }
 
     public function getAllOnFieldAndNotField($field_on, $value_on, $field_off, $value_off, $order="", $up = true) {
@@ -96,6 +99,10 @@ abstract class GlobalClass {
 
     public function getCountOnFieldAndOnField($field_on, $value_on, $field_off, $value_off){
         return $this->db->getCountOnFieldAndOnField($this->table_name, $field_on, $value_on, $field_off, $value_off);
+    }
+
+    public function getCountOnFieldAndOnFieldAndField($field_on, $value_on, $field_off, $value_off, $field, $value){
+        return $this->db->getCountOnFieldAndOnFieldAndField($this->table_name, $field_on, $value_on, $field_off, $value_off, $field, $value);
     }
 
     public function getCount() {

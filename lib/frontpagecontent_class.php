@@ -268,7 +268,7 @@ class FrontPageContent extends Modules {
                 return $who_pre.$accept.$canсell;
             case "completed":
                 $acceptlink = $this->config->siteAddress."?typepage=completed&do=in_pre_work&id=".$obj_id;
-                $canсelllink = $this->config->siteAddress."?typepage=completed&do=pre_delete=".$obj_id;
+                $canсelllink = $this->config->siteAddress."?typepage=completed&do=pre_delete&id=".$obj_id;
                 $accept = "<a href='$acceptlink' title='Вернуть в работу'><i class=\"fa fa-gears fa-lg\"></i></a>";
                 $canсell = "<a href='$canсelllink' title='Удалить'><i class=\"fa fa-trash fa-lg\"></i></a>";
                 return $accept.$canсell;

@@ -35,7 +35,7 @@ class Object extends GlobalClass
     }
 
     public function getCountInWork($user_id) {
-        return $this->getCountOnFieldAndOnField("working_id", $user_id, "deleted_id", "0");
+        return $this->getCountOnFieldAndOnFieldAndField("working_id", $user_id, "deleted_id", "0", "completed_id", "0");
     }
 
     public function getCountCompleted($user_id) {
@@ -65,7 +65,7 @@ class Object extends GlobalClass
     }
 
     public function getInWork($user_id){
-        return $this->getAllOnFieldAndField("working_id", $user_id, "deleted_id", "0", $this->order, $this->up);
+        return $this->getAllOnFieldAndFieldAndField("working_id", $user_id, "deleted_id", "0", "completed_id", "0", $this->order, $this->up);
     }
 
     public function getCompleted($user_id){
@@ -83,7 +83,7 @@ class Object extends GlobalClass
 
 
     public function editInWork($obj_id, $user_id){
-        return $this->edit($obj_id, array("created_id" => $user_id,"working_id" => $user_id, "pre_working_id" => "0"));
+        return $this->edit($obj_id, array("created_id" => $user_id,"working_id" => $user_id, "pre_working_id" => "0", "completed_id" => "0", "date" => time()));
     }
 
     public function editCancelInWork($obj_id){
@@ -108,8 +108,11 @@ class Object extends GlobalClass
     
     public function getAllFavoritesOnIds($arrayids){
         return $this->getAllOnIds($arrayids);
-    }    
+    } 
     
+    public function doCompleted($obj_id, $competed_id) {
+        return $this->edit($obj_id, array("completed_id" => $competed_id));
+    }  
     
     public function getObjOnId($id) {
         return $this->get($id);

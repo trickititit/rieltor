@@ -223,6 +223,19 @@ class doIt {
         }
     }
 
+    public function doCompleted() {
+        $objects = $this->object->getAll();
+        $now_date = time();
+        for ($i = 0; $i < count($objects); $i++) {
+            $obj_date = new DateTime();
+            $obj_date->setTimestamp($objects[$i]["date"]);
+            $obj_date->add(new DateInterval('P1M'));
+            if ($obj_date->getTimestamp() < $now_date) {
+                $this->object->doCompleted($objects[$i]["id"], $objects[$i]["created_id"]);
+            }
+        }
+    }
+
     private function doAccess($access_lvl) {
         if ($access_lvl == 2) {
             return true;

@@ -50,6 +50,8 @@
                 break;
             case "del_adm_message": $doit->doDelAdmMessage();
                 break;
+            case "check_completed": $doit->doCompleted();
+                break;
             default: break;
         }
     }
