@@ -1634,3 +1634,25 @@ h1 {
 .pagina {
     margin-top: 20px;
 }
+
+.obj_desc {
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.obj_desc:hover {
+    overflow: visible;
+    z-index: 999999;
+    background-color: #fff;
+    height: auto;
+}
+
+.tab_content {
+    height: 58px;
+    overflow: hidden;
+}
+
+.tab_content_hover {
+    overflow: visible;
+    height: auto;
+}

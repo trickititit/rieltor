@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="table table-hover">
     <thead>
     <tr>
@@ -17,3 +18,15 @@
     %post_table%
     </tbody>
 </table>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.table tr').hover(function () {
+            $(this).find('.tab_content').stop(true).animate({ height: "200px"}, 300)
+        },
+                function () {
+                    $(this).find('.tab_content').stop(true).animate({ height: "58px"}, 300)
+                })
+
+    });
+</script>

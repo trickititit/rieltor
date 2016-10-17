@@ -168,7 +168,7 @@ class FrontPageContent extends Modules {
                            $sr["obj_square"] = $this->objects[$i]["obj_square"]." м²";
                            $sr["obj_form"] = $this->objects[$i]["obj_floor"]."/".$this->objects[$i]["obj_home_floors"]." эт.";
                     $sr["obj_title"] = ($this->objects[$i]["obj_rooms"] == "Студия")?$this->objects[$i]["obj_rooms"]." квартира": $this->objects[$i]["obj_rooms"]."-к квартира";
-                    $sr["obj_address"] = $this->objects[$i]["obj_city"].", ".$this->objects[$i]["obj_area"].", ".$this->objects[$i]["obj_address"];
+                    $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
                     $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
                     $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
@@ -183,7 +183,7 @@ class FrontPageContent extends Modules {
                     $sr["obj_square"] = $this->objects[$i]["obj_house_square"]." м²";
                     $sr["obj_form"] = "на участке ".$this->objects[$i]["obj_earth_square"]." сот.";
                     $sr["obj_title"] = $this->objects[$i]["obj_type"];
-                    $sr["obj_address"] = $this->objects[$i]["obj_city"].", ".$this->objects[$i]["obj_area"].", ".$this->objects[$i]["obj_address"];
+                    $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
                     $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
                     $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
@@ -198,7 +198,7 @@ class FrontPageContent extends Modules {
                     $sr["obj_square"] = $this->objects[$i]["obj_square"]." м²";
                     $sr["obj_form"] = $this->objects[$i]["obj_floor"]."/".$this->objects[$i]["obj_home_floors"]." эт.";
                     $sr["obj_title"] = "Комната в ".$this->objects[$i]["obj_rooms"]."-к";
-                    $sr["obj_address"] = $this->objects[$i]["obj_city"].", ".$this->objects[$i]["obj_area"].", ".$this->objects[$i]["obj_address"];
+                    $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
                     $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
                     $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
