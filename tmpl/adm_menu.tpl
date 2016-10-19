@@ -1,1 +1,1 @@
-<li %active%><a href="%link%" >%title%<span class="badge margin-left">%count%</span></a></li>
+<li %active%><a href="%link%" >%title%<span class="%class%">%count%</span></a></li>

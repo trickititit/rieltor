@@ -251,7 +251,14 @@ class DataBase {
             switch ($logic) {
                 case "LIKE":
                     for ($i = 1; $i < count($values); $i++) {
-                        $where .= "`".$key."` LIKE '%".addslashes($values[$i])."%'";
+                        $words = mb_strtolower($values[$i]);
+                        $words = trim($words);
+                        $words = quotemeta($words);
+                        $arraywords = explode(" " ,$words);
+                        foreach ($arraywords as $keys => $value) {
+                            if (isset($arraywords[$keys - 1])) $where .= " AND";
+                            $where .= "`".$key."` LIKE '%".addslashes($value)."%'";
+                        }
                         if (($i + 1) != count($values)) $where .= " OR";
                     }
                 break;

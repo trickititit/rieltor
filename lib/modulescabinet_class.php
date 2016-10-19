@@ -17,7 +17,7 @@ require_once "message_class.php";
 require_once "admmenu_class.php";
 require_once "images_class.php";
 
-abstract class Modules {
+abstract class ModulesCabinet {
     protected $config;
     protected $post;
     protected $section;
@@ -57,6 +57,9 @@ abstract class Modules {
 
 
     public function getContent(){
+        if (!$this->user_info) {
+            $this->redirect($this->config->siteAddress."cabinet/login.php");
+        }
         $sr["title"] = $this->getTitle();
         $sr["meta_desc"] = $this->getDescription();
         $sr["meta_key"] = $this->getKeywords();
@@ -68,7 +71,7 @@ abstract class Modules {
         $sr["bottom"] = $this->getBottom();
         $sr["username"] = $this->getUserName();
         $sr["editprofile"] = "&id=".$this->user_info["id"];
-        return $this->getReplaceTemplate($sr, "mainpage_cont");
+        return $this->getReplaceTemplate($sr, "main");
     }
 
     private function redirect($link) {
@@ -150,11 +153,11 @@ abstract class Modules {
 
     protected function getTemplateOnly($name)
     {
-        return file_get_contents($this->config->dir_tmpl . $name . ".tpl");
+        return file_get_contents("../".$this->config->dir_tmpl . $name . ".tpl");
     }
 
     protected function getTemplate($name){
-        $text = file_get_contents($this->config->dir_tmpl.$name.".tpl");
+        $text = file_get_contents("../".$this->config->dir_tmpl.$name.".tpl");
         return str_replace("%address%", $this->config->siteAddress, $text);
     }
 

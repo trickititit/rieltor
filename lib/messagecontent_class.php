@@ -1,8 +1,8 @@
 <?php
 
-require_once "modules_class.php";
+require_once "modulescabinet_class.php";
 
-class MessageContent extends Modules {
+class MessageContent extends ModulesCabinet {
 
     private $message_title;
     private $message_text;

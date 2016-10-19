@@ -77,12 +77,12 @@ class doIt {
         if ($result) {
             $_SESSION["message"] = "SUCCESS_DEL_ADM_MESSAGE";
             $_SESSION["type_message"] = "success";
-            $this->redirect($this->config->siteAddress."?view=messages");
+            $this->redirect($this->config->siteAddress."cabinet\?view=messages");
         }
         else {
             $_SESSION["message"] = "FAIL_DEL_ADM_MESSAGE";
             $_SESSION["type_message"] = "warning";
-            $this->redirect($this->config->siteAddress."?view=messages");
+            $this->redirect($this->config->siteAddress."cabinet\?view=messages");
         }
     }
 

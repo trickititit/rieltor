@@ -5,9 +5,9 @@
  * Date: 21.07.2016
  * Time: 22:57
  */
-require_once "modules_class.php";
+require_once "modulescabinet_class.php";
 
-class AdmMessageContent extends Modules {
+class AdmMessageContent extends ModulesCabinet {
 
     private $adm_messages;
     private $page;
@@ -60,7 +60,7 @@ class AdmMessageContent extends Modules {
             $text .= "<div class='col-md-12'>";
             $text .= "<div class=\"round-a-".$this->adm_messages[$i]["type"]."  col-md-12\">
             <div class='round-title col-md-8'>".$this->adm_messages[$i]["title"]."</div><div class='round-date col-md-4'>Добавлено: ".$this->formantDate($this->adm_messages[$i]["date"])."</div><div class='round-content col-md-12'>".htmlspecialchars_decode($this->adm_messages[$i]["short_desc"])."</div> ";
-            $text .= "<div class='col-md-12 block-a'><a href=\"".$this->config->siteAddress."?view=one_message&id=".$this->adm_messages[$i]["id"]."\"><button class=\"btn btn-default\" style='float: right' >Подробнее</button></a></div></div></div>";
+            $text .= "<div class='col-md-12 block-a'><a href=\"".$this->config->siteAddress."cabinet\?view=one_message&id=".$this->adm_messages[$i]["id"]."\"><button class=\"btn btn-default\" style='float: right' >Подробнее</button></a></div></div></div>";
         }
         return $text;
     }
@@ -72,7 +72,7 @@ class AdmMessageContent extends Modules {
     protected function getBottom()
     {
         $page = (isset($this->data["page"]))? $this->data["page"]:1;
-        return $this->getPagination(count($this->adm_messages), $this->count_on_page, $this->config->siteAddress."?view=messages", $page);
+        return $this->getPagination(count($this->adm_messages), $this->count_on_page, $this->config->siteAddress."cabinet\?view=messages", $page);
     }
 
     protected function getNavMenu()
@@ -101,10 +101,10 @@ class AdmMessageContent extends Modules {
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Обьекты<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
-                            <li><a href=\"".$this->config->siteAddress."\">Просмотр обьектов</a></li>
-                            <li><a href=\"".$this->config->siteAddress."?view=objcreate\">Добавить новый</a></li>";
+                            <li><a href=\"".$this->config->siteAddress."cabinet\">Просмотр обьектов</a></li>
+                            <li><a href=\"".$this->config->siteAddress."cabinet\?view=objcreate\">Добавить новый</a></li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .="<li><a href=\"".$this->config->siteAddress."?view=export\">Отчет по обьектам</a></li>";
+            $text .="<li><a href=\"".$this->config->siteAddress."cabinet\?view=export\">Отчет по обьектам</a></li>";
         }
         $text .= "</ul>
                     </li>
@@ -112,32 +112,32 @@ class AdmMessageContent extends Modules {
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Пользователь<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
-                            <li><a href=\"".$this->config->siteAddress."?view=profileedit%editprofile%\">Редактирование профиля</a></li>";
+                            <li><a href=\"".$this->config->siteAddress."cabinet\?view=profileedit%editprofile%\">Редактирование профиля</a></li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=reg\">Добавить нового пользователя</a></li>";
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=profiles\">Все пользователи</a></li>";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "cabinet\?view=reg\">Добавить нового пользователя</a></li>";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "cabinet\?view=profiles\">Все пользователи</a></li>";
         }
         $text .= "</ul></li>";
         if ($this->user_info["access_lvl"] == 2) {
             $text .= "<li class=\"dropdown active\">
                         <a class=\"dropdown - toggle\" data-toggle=\"dropdown\" href=\"#\">Сообщения<span class=\"caret\"></span></a>
                         <ul class=\"dropdown-menu\" >
-                            <li ><a href = \"".$this->config->siteAddress."?view=messages\" >Просмотр сообщений</a ></li >";
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=add_message\" >Добавить новое сообщение</a ></li >";
+                            <li ><a href = \"".$this->config->siteAddress."cabinet\?view=messages\" >Просмотр сообщений</a ></li >";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "cabinet\?view=add_message\" >Добавить новое сообщение</a ></li >";
             $text .= "</ul></li>";
         } else {
             $text .= "<li class='active'>
-                        <a href=\"".$this->config->siteAddress."?view=messages\">Сообщения</a>
+                        <a href=\"".$this->config->siteAddress."cabinet\?view=messages\">Сообщения</a>
                         </li >";
         }
 
         if ($this->user_info["access_lvl"] == 2) {
             $text .= "<li>
-                        <a href=\"".$this->config->siteAddress."?view=comfort\">Удобства</a>
+                        <a href=\"".$this->config->siteAddress."cabinet\?view=comfort\">Удобства</a>
                     </li>";
         }
         $text .="<li>
-                        <a href=\"".$this->config->siteAddress."?view=favorites\">Избранное</a>
+                        <a href=\"".$this->config->siteAddress."cabinet\?view=favorites\">Избранное</a>
                     </li>
                 </ul>";
         return $text;

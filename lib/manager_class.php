@@ -61,11 +61,11 @@ class Manager {
     
     public function objExport(){       
         $result = $this->export->get_export();
-        if (!$result) return $this->returnMessage("FAIL_EXPORT_OBJ", "warning", $this->config->siteAddress);
+        if (!$result) return $this->returnMessage("FAIL_EXPORT_OBJ", "warning", $this->config->siteAddress."cabinet/");
     }
 
     public function regUser() {
-        $link_reg = $this->config->siteAddress."?view=reg";        
+        $link_reg = $this->config->siteAddress."cabinet/?view=reg";
         $login = $this->data["reg_login"];
         if ($this->user->isExistsUser($login)) return $this->returnMessage("EXISTS_LOGIN","warning", $link_reg);
         $password = $this->data["reg_password"];
@@ -75,7 +75,7 @@ class Manager {
         $email = $this->data["reg_email"];
         $contact = $this->data["reg_contact"];
         $result = $this->user->addUser($login, $password, $name, $email, $contact, 1);
-        if ($result)  return $this->returnMessage("SUCCESS_REG", "success", $this->config->siteAddress);
+        if ($result)  return $this->returnMessage("SUCCESS_REG", "success", $this->config->siteAddress."cabinet/");
         else return $this->unknownError($link_reg);
     }
 
@@ -91,7 +91,7 @@ class Manager {
         $login = $this->user_info["login"];
         $contact = $this->data["edit_contact"];
         $result = $this->user->editUser($id, $login ,$password, $name, $email, $contact);
-        if ($result)  return $this->returnMessage("SUCCESS_EDIT", "success", $this->config->siteAddress);
+        if ($result)  return $this->returnMessage("SUCCESS_EDIT", "success", $this->config->siteAddress."cabinet/");
         else return $this->unknownError($link_edit);
     }
 
@@ -108,7 +108,7 @@ class Manager {
         $contact = $this->data["edit_contact"];
         $trust = $this->data["edit_trust"];
         $result = $this->user->editUser($id, $login ,$password, $name, $email, $contact, $trust);
-        if ($result)  return $this->returnMessage("SUCCESS_EDIT", "success", $this->config->siteAddress);
+        if ($result)  return $this->returnMessage("SUCCESS_EDIT", "success", $this->config->siteAddress."cabinet/");
         else return $this->unknownError($link_edit);
     }
 
@@ -117,7 +117,7 @@ class Manager {
         $password = $this->data["password"];
         $password = $this->hashPassword($password);        
         $session_key = $this->hashSessionKey($login);
-        $r = $this->config->siteAddress."?view=messages";
+        $r = $this->config->siteAddress."cabinet/?view=messages";
         if ($this->user->checkUser($login, $password)) {            
             $_SESSION["login"] = $login;
             $_SESSION["password"] = $password;
@@ -130,7 +130,7 @@ class Manager {
     }
 
     public function addComfort() {
-        $link_ = $this->config->siteAddress."?view=comfort";
+        $link_ = $this->config->siteAddress."cabinet/?view=comfort";
         $title = $this->data["title"];
         $desc = $this->data["desc"];
         $label = $this->data["label"];        
@@ -140,7 +140,7 @@ class Manager {
     }
 
     public function addAdmMessage() {
-        $link_ = $this->config->siteAddress."?view=messages";
+        $link_ = $this->config->siteAddress."cabinet/?view=messages";
         $title = $this->data["title"];
         $desc = $this->data["desc"];
         $short_desc = $this->data["short_desc"];
@@ -152,7 +152,7 @@ class Manager {
     }
 
     public function editAdmMessage() {
-        $link_ = $this->config->siteAddress."?view=messages";
+        $link_ = $this->config->siteAddress."cabinet/?view=messages";
         $id = $this->data["id"];
         $title = $this->data["title"];
         $desc = $this->data["desc"];
@@ -178,18 +178,18 @@ class Manager {
                 $home_floors = $this->data["obj_home_floors_1"];
                 $square = $this->data["obj_square"];
                 $kadastr = $this->data["obj_kadastr"];
-                $desc = $this->data["obj_desc"];
+                $desc = $this->checkStringBr($this->data["obj_desc"]);
                 $price_square = $this->data["obj_price_square"];
                 $price = $this->data["obj_price"];
                 $doplata = $this->data["obj_doplata"];
-                $contacts = $this->data["obj_client_contact"];                
+                $contacts = $this->checkStringBr($this->data["obj_client_contact"]);                
                 $geo = $this->data["obj_geo"];
-                $comment = $this->data["obj_comment"];
+                $comment = $this->checkStringBr($this->data["obj_comment"]);
                 $comforts = $this->getComfortsId();                
                 $created_id = ($this->user_info)? $this->user_info["id"]: 0;
                 $result = $this->object->addObjType_1($comment, $comforts, $data, $geo,$type, $deal, $form, $city, $area, $address, $room, $floor, $build_type, $home_floors, $square, $kadastr, $desc, $price_square, $price, $doplata, $contacts, $created_id);
                 $this->CreateImg($this->data["obj_id"]);
-                if ($result)  return $this->returnMessage("SUCCESS_ADD_OBJ", "success", $this->config->siteAddress);
+                if ($result)  return $this->returnMessage("SUCCESS_ADD_OBJ", "success", $this->config->siteAddress."cabinet/");
                 break;
             case "2": $deal = $this->data["obj_deal"];
                 $form = $this->data["obj_form_2"];
@@ -202,18 +202,18 @@ class Manager {
                 $distance = $this->data["obj_distance"];
                 $earth_square = $this->data["obj_earth_square"];
                 $kadastr = $this->data["obj_kadastr"];
-                $desc = $this->data["obj_desc"];
+                $desc = $this->checkStringBr($this->data["obj_desc"]);
                 $price_square = $this->data["obj_price_square"];
                 $price = $this->data["obj_price"];
                 $doplata = $this->data["obj_doplata"];
-                $contacts = $this->data["obj_client_contact"];                
+                $contacts = $this->checkStringBr($this->data["obj_client_contact"]);                
                 $geo = $this->data["obj_geo"];
-                $comment = $this->data["obj_comment"];                
+                $comment = $this->checkStringBr($this->data["obj_comment"]);                
                 $comforts = $this->getComfortsId();
                 $created_id = ($this->user_info)? $this->user_info["id"]: 0;
                 $result = $this->object->addObjType_2($comment,$comforts, $data, $geo, $type, $deal, $form, $city, $area, $address, $distance, $earth_square, $build_type, $home_floors, $square, $kadastr, $desc, $price_square, $price, $doplata, $contacts, $created_id);
                 $this->CreateImg($this->data["obj_id"]);
-                if ($result)  return $this->returnMessage("SUCCESS_ADD_OBJ", "success", $this->config->siteAddress);
+                if ($result)  return $this->returnMessage("SUCCESS_ADD_OBJ", "success", $this->config->siteAddress."cabinet/");
                 break;
             case "3": $deal = $this->data["obj_deal"];
                 $form = $this->data["obj_form_3"];
@@ -226,18 +226,18 @@ class Manager {
                 $home_floors = $this->data["obj_home_floors_1"];
                 $square = $this->data["obj_square"];
                 $kadastr = $this->data["obj_kadastr"];
-                $desc = $this->data["obj_desc"];
+                $desc = $this->checkStringBr($this->data["obj_desc"]);
                 $price_square = $this->data["obj_price_square"];
                 $price = $this->data["obj_price"];
                 $doplata = $this->data["obj_doplata"];
-                $contacts = $this->data["obj_client_contact"];                
+                $contacts = $this->checkStringBr($this->data["obj_client_contact"]);                
                 $geo = $this->data["obj_geo"];
-                $comment = $this->data["obj_comment"];
+                $comment = $this->checkStringBr($this->data["obj_comment"]);
                 $comforts = $this->getComfortsId();                
                 $created_id = ($this->user_info)? $this->user_info["id"]: 0;
                 $result = $this->object->addObjType_1($comment, $comforts, $data, $geo, $type, $deal, $form, $city, $area, $address, $room, $floor, $build_type, $home_floors, $square, $kadastr, $desc, $price_square, $price, $doplata, $contacts, $created_id);
                 $this->CreateImg($this->data["obj_id"]);
-                if ($result)  return $this->returnMessage("SUCCESS_ADD_OBJ", "success", $this->config->siteAddress);
+                if ($result)  return $this->returnMessage("SUCCESS_ADD_OBJ", "success", $this->config->siteAddress."cabinet/");
                 break;
             default: break;
         }
@@ -276,15 +276,15 @@ class Manager {
                 $home_floors = $this->data["obj_home_floors_1"];
                 $square = $this->data["obj_square"];
                 $kadastr = $this->data["obj_kadastr"];
-                $desc = $this->data["obj_desc"];
+                $desc =   $this->checkStringBr($this->data["obj_desc"]);
                 $price_square = $this->data["obj_price_square"];
                 $price = $this->data["obj_price"];
                 $doplata = $this->data["obj_doplata"];
-                $contacts = $this->data["obj_client_contact"];                
-                $comment = $this->data["obj_comment"];
+                $contacts = $this->checkStringBr($this->data["obj_client_contact"]);
+                $comment = $this->checkStringBr($this->data["obj_comment"]);
                 $comforts = $this->getComfortsId();
                 $result = $this->object->editObjType_1($comment, $comforts, $id, $type, $deal, $form, $city, $area, $address, $room, $floor, $build_type, $home_floors, $square, $kadastr, $desc, $price_square, $price, $doplata, $contacts);
-                if ($result) return $this->returnMessage("SUCCESS_EDIT_OBJ", "success", $this->config->siteAddress);
+                if ($result) return $this->returnMessage("SUCCESS_EDIT_OBJ", "success", $this->config->siteAddress."cabinet/");
                 break;
             case "2":                
                 $deal = $this->data["obj_deal"];
@@ -298,15 +298,15 @@ class Manager {
                 $distance = $this->data["obj_distance"];
                 $earth_square = $this->data["obj_earth_square"];
                 $kadastr = $this->data["obj_kadastr"];
-                $desc = $this->data["obj_desc"];
+                $desc = $this->checkStringBr($this->data["obj_desc"]);
                 $price_square = $this->data["obj_price_square"];
                 $price = $this->data["obj_price"];
                 $doplata = $this->data["obj_doplata"];
-                $contacts = $this->data["obj_client_contact"];                
-                $comment = $this->data["obj_comment"];
+                $contacts = $this->checkStringBr($this->data["obj_client_contact"]);                
+                $comment = $this->checkStringBr($this->data["obj_comment"]);
                 $comforts = $this->getComfortsId();
                 $result = $this->object->editObjType_2($comment, $comforts, $id, $type, $deal, $form, $city, $area, $address, $distance, $earth_square, $build_type, $home_floors, $square, $kadastr, $desc, $price_square, $price, $doplata, $contacts);
-                if ($result) return $this->returnMessage("SUCCESS_EDIT_OBJ", "success", $this->config->siteAddress);
+                if ($result) return $this->returnMessage("SUCCESS_EDIT_OBJ", "success", $this->config->siteAddress."cabinet/");
                 break;
             case "3":
                 $deal = $this->data["obj_deal"];
@@ -320,15 +320,15 @@ class Manager {
                 $home_floors = $this->data["obj_home_floors_1"];
                 $square = $this->data["obj_square"];
                 $kadastr = $this->data["obj_kadastr"];
-                $desc = $this->data["obj_desc"];
+                $desc = $this->checkStringBr($this->data["obj_desc"]);
                 $price_square = $this->data["obj_price_square"];
                 $price = $this->data["obj_price"];
                 $doplata = $this->data["obj_doplata"];
-                $contacts = $this->data["obj_client_contact"];                
-                $comment = $this->data["obj_comment"];
+                $contacts = $this->checkStringBr($this->data["obj_client_contact"]);                
+                $comment = $this->checkStringBr($this->data["obj_comment"]);
                 $comforts = $this->getComfortsId();
                 $result = $this->object->editObjType_1($comment, $comforts, $id, $type, $deal, $form, $city, $area, $address, $room, $floor, $build_type, $home_floors, $square, $kadastr, $desc, $price_square, $price, $doplata, $contacts);
-                if ($result) return $this->returnMessage("SUCCESS_EDIT_OBJ", "success",  $this->config->siteAddress);
+                if ($result) return $this->returnMessage("SUCCESS_EDIT_OBJ", "success",  $this->config->siteAddress."cabinet/");
                 break;
             default:
                 break;
@@ -350,6 +350,11 @@ class Manager {
         }
         $text = substr($text, 0 , -1);
         return $text;
+    }
+
+    private function checkStringBr($string){
+       $string = str_replace(array("\r\n", "\r", "\n"), "\\n", $string);
+        return $string;
     }
     
     private function hashPassword($password) {

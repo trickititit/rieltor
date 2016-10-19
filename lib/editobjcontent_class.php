@@ -6,9 +6,9 @@
  * Time: 21:18
  */
 
-    require_once "modules_class.php";
+    require_once "modulescabinet_class.php";
 
-class EditObjContent extends Modules {
+class EditObjContent extends ModulesCabinet {
 
     private $obj;
     private $comforts;
@@ -87,9 +87,9 @@ class EditObjContent extends Modules {
                     $('#desc textarea').val(\"".$this->obj["obj_desc"]."\");
                     $('#price input').val(\"".$this->obj["obj_price"]."\");
                     $('#doplata input').val(\"".$this->obj["obj_doplata"]."\");                    
-                    $('#client_contact input').val(\"".$this->obj["obj_client_contact"]."\");
+                    $('#client_contact input').val(\"".htmlspecialchars_decode($this->obj["obj_client_contact"])."\");
                     $('#hotelki textarea').val(\"".$this->obj["obj_hotelki"]."\");
-                    $('#comment textarea').val(\"".$this->obj["obj_desc_short"]."\");
+                    $('#comment textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc_short"])."\");
                     $('#price_square input').val(\"".$this->obj["obj_price_square"]."\");
                     $('#obj_id').val(".$this->obj["id"]."); 
                     $('#obj-id').val(".$this->obj["id"]."); 
@@ -122,12 +122,12 @@ class EditObjContent extends Modules {
                     $('#earth_square input').val(\"".$this->obj["obj_earth_square"]."\");
                     $('#house_square input').val(\"".$this->obj["obj_house_square"]."\");
                     $('#kadastr input').val(\"".$this->obj["obj_kadastr"]."\");
-                    $('#desc textarea').val(\"".$this->obj["obj_desc"]."\");
+                    $('#desc textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc"])."\");
                     $('#price input').val(\"".$this->obj["obj_price"]."\");
                     $('#doplata input').val(\"".$this->obj["obj_doplata"]."\");                    
-                    $('#client_contact input').val(\"".$this->obj["obj_client_contact"]."\");
+                    $('#client_contact input').val(\"".htmlspecialchars_decode($this->obj["obj_client_contact"])."\");
                     $('#hotelki textarea').val(\"".$this->obj["obj_hotelki"]."\");
-                    $('#comment textarea').val(\"".$this->obj["obj_desc_short"]."\");
+                    $('#comment textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc_short"])."\");
                     $('#price_square input').val(\"".$this->obj["obj_price_square"]."\");
                     $('#obj_id').val(".$this->obj["id"].");
                     $('#obj-id').val(".$this->obj["id"]."); 
@@ -149,12 +149,12 @@ class EditObjContent extends Modules {
                     $('#home_floors_1 select').val(\"".$this->obj["obj_home_floors"]."\");
                     $('#square input').val(\"".$this->obj["obj_square"]."\");
                     $('#kadastr input').val(\"".$this->obj["obj_kadastr"]."\");
-                    $('#desc textarea').val(\"".$this->obj["obj_desc"]."\");
+                    $('#desc textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc"])."\");
                     $('#price input').val(\"".$this->obj["obj_price"]."\");
                     $('#doplata input').val(\"".$this->obj["obj_doplata"]."\");                    
-                    $('#client_contact input').val(\"".$this->obj["obj_client_contact"]."\");
+                    $('#client_contact input').val(\"".htmlspecialchars_decode($this->obj["obj_client_contact"])."\");
                     $('#hotelki textarea').val(\"".$this->obj["obj_hotelki"]."\");
-                    $('#comment textarea').val(\"".$this->obj["obj_desc_short"]."\");
+                    $('#comment textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc_short"])."\");
                     $('#price_square input').val(\"".$this->obj["obj_price_square"]."\");
                     $('#obj_id').val(".$this->obj["id"].");
                     $('#obj-id').val(".$this->obj["id"]."); 
@@ -184,6 +184,7 @@ class EditObjContent extends Modules {
 
         return $text;
     }
+    
 
     private function getAreaOncity($city) {
         if ($city == "Волгоград") {
@@ -232,10 +233,10 @@ class EditObjContent extends Modules {
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Обьекты<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
-                            <li><a href=\"".$this->config->siteAddress."\">Просмотр обьектов</a></li>
-                            <li><a href=\"".$this->config->siteAddress."?view=objcreate\">Добавить новый</a></li>";
+                            <li><a href=\"".$this->config->siteAddress."cabinet\">Просмотр обьектов</a></li>
+                            <li><a href=\"".$this->config->siteAddress."cabinet\?view=objcreate\">Добавить новый</a></li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .="<li><a href=\"".$this->config->siteAddress."?view=export\">Отчет по обьектам</a></li>";
+            $text .="<li><a href=\"".$this->config->siteAddress."cabinet\?view=export\">Отчет по обьектам</a></li>";
         }
         $text .= "</ul>
                     </li>
@@ -243,31 +244,31 @@ class EditObjContent extends Modules {
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Пользователь<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
-                            <li><a href=\"".$this->config->siteAddress."?view=profileedit%editprofile%\">Редактирование профиля</a></li>";
+                            <li><a href=\"".$this->config->siteAddress."cabinet\?view=profileedit%editprofile%\">Редактирование профиля</a></li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=reg\">Добавить нового пользователя</a></li>";
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=profiles\">Все пользователи</a></li>";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "cabinet\?view=reg\">Добавить нового пользователя</a></li>";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "cabinet\?view=profiles\">Все пользователи</a></li>";
         }
         $text .= "</ul></li>";
         if ($this->user_info["access_lvl"] == 2) {
             $text .= "<li class=\"dropdown\">
                         <a class=\"dropdown - toggle\" data-toggle=\"dropdown\" href=\"#\">Сообщения<span class=\"caret\"></span></a>
                         <ul class=\"dropdown-menu\" >
-                            <li ><a href = \"".$this->config->siteAddress."?view=messages\" >Просмотр сообщений</a ></li >";
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=add_message\" >Добавить новое сообщение</a ></li >";
+                            <li ><a href = \"".$this->config->siteAddress."cabinet\?view=messages\" >Просмотр сообщений</a ></li >";
+            $text .= "<li><a href=\"" . $this->config->siteAddress . "cabinet\?view=add_message\" >Добавить новое сообщение</a ></li >";
             $text .= "</ul></li>";
         } else {
             $text .= "<li>
-                        <a href=\"".$this->config->siteAddress."?view=messages\">Сообщения</a>
+                        <a href=\"".$this->config->siteAddress."cabinet\?view=messages\">Сообщения</a>
                         </li >";
         }
         if ($this->user_info["access_lvl"] == 2) {
             $text .= "<li>
-                        <a href=\"".$this->config->siteAddress."?view=comfort\">Удобства</a>
+                        <a href=\"".$this->config->siteAddress."cabinet\?view=comfort\">Удобства</a>
                     </li>";
         }
         $text .="<li>
-                        <a href=\"".$this->config->siteAddress."?view=favorites\">Избранное</a>
+                        <a href=\"".$this->config->siteAddress."cabinet\?view=favorites\">Избранное</a>
                     </li>
                 </ul>";
         return $text;

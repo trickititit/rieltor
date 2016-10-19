@@ -6,9 +6,9 @@
  * Time: 11:32
  */
 
-require_once "modules_class.php";
+require_once "modulescabinet_class.php";
 
-class FrontPageContent extends Modules {
+class FrontPageContent extends ModulesCabinet {
 
     private $page;
     private $objects;
@@ -25,7 +25,7 @@ class FrontPageContent extends Modules {
         $this->menu = $this->adm_menu->getAll();
         $this->images = $this->image->getAll();
         $this->page = (isset($this->data["page"]))? $this->data["page"]: 1;
-        $this->link = (isset($this->data["typepage"]))? $this->config->siteAddress."?typepage=".$this->data["typepage"]: $this->config->siteAddress;
+        $this->link = (isset($this->data["typepage"]))? $this->config->siteAddress."cabinet/?typepage=".$this->data["typepage"]: $this->config->siteAddress."cabinet/";
         $this->users = $this->user->getAll();
         $this->favorites = $this->user->getAllFavoritesOnUser($this->user_info["id"]);
     }
@@ -42,26 +42,37 @@ class FrontPageContent extends Modules {
             if ($data == $this->menu[$i]["label"]) $sr["active"] = "class=\"active\"";
             else $sr["active"] = "";
             $sr["title"] = $this->menu[$i]["title"];
-            $sr["link"] = $this->config->siteAddress.$label;
+            $sr["link"] = $this->config->siteAddress."cabinet/".$label;
             switch ($this->menu[$i]["label"]) {
                 case "all": $sr["count"] = $this->object->getCountAll();
+                            $sr["class"] = "badge margin-left";
                     break;
                 case "my": $sr["count"] = $this->object->getCountMy($this->user_info["id"]);
+                    $sr["class"] = "badge margin-left";
                     break;
                 case "in_work": $sr["count"] = $this->object->getCountInWork($this->user_info["id"]);
+                    $sr["class"] = "badge margin-left";
                     break;
                 case "pre_working": $sr["count"] = $this->object->getCountPreWorking();
+                    $sr["class"] = "badge margin-left";
                     break;
-                case "completed": $sr["count"] = $this->object->getCountCompleted($this->user_info["id"]);
+                case "completed": $count = $this->object->getCountCompleted($this->user_info["id"]);
+                                  if ($count > 0) {
+                                      $sr["class"] = "badge margin-left badge-war";
+                                  } else {
+                                      $sr["class"] = "badge margin-left";
+                                  }
+                    $sr["count"] = $count;                    
                     break;
                 case "deleted": $sr["count"] = $this->object->getCountDeleted();
+                    $sr["class"] = "badge margin-left";
                     break;
                 default: break;
             }
             $text .= $this->getReplaceTemplate($sr, "adm_menu");
         }
         $link = "";
-        $link .= "/?";
+        $link .= $this->config->siteAddress."cabinet/?";
         if (isset($this->data)) {
             foreach ($this->data as $key => $value) {
                 if ($key == "order") {
@@ -99,7 +110,7 @@ class FrontPageContent extends Modules {
     protected function getBottom()
     {
         if ($this->data["search"] || $this->data["order"]) {
-            $new_link = $this->config->siteAddress. "?";
+            $new_link = $this->config->siteAddress. "cabinet/?";
             foreach ($this->data as $key => $value) {
                 if($key != "page"){
                     $new_link .= $key ."=".$value."&";
@@ -169,8 +180,8 @@ class FrontPageContent extends Modules {
                            $sr["obj_form"] = $this->objects[$i]["obj_floor"]."/".$this->objects[$i]["obj_home_floors"]." эт.";
                     $sr["obj_title"] = ($this->objects[$i]["obj_rooms"] == "Студия")?$this->objects[$i]["obj_rooms"]." квартира": $this->objects[$i]["obj_rooms"]."-к квартира";
                     $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
-                    $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
-                    $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
+                    $sr["obj_comment"] = $this->checkStringBr($this->objects[$i]["obj_desc"]);
+                    $sr["obj_short_desc"] = $this->checkStringBr($this->objects[$i]["obj_desc_short"]);
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
                     $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
@@ -184,8 +195,8 @@ class FrontPageContent extends Modules {
                     $sr["obj_form"] = "на участке ".$this->objects[$i]["obj_earth_square"]." сот.";
                     $sr["obj_title"] = $this->objects[$i]["obj_type"];
                     $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
-                    $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
-                    $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
+                    $sr["obj_comment"] = $this->checkStringBr($this->objects[$i]["obj_desc"]);
+                    $sr["obj_short_desc"] = $this->checkStringBr($this->objects[$i]["obj_desc_short"]);
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
                     $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
@@ -199,8 +210,8 @@ class FrontPageContent extends Modules {
                     $sr["obj_form"] = $this->objects[$i]["obj_floor"]."/".$this->objects[$i]["obj_home_floors"]." эт.";
                     $sr["obj_title"] = "Комната в ".$this->objects[$i]["obj_rooms"]."-к";
                     $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
-                    $sr["obj_comment"] = $this->objects[$i]["obj_desc"];
-                    $sr["obj_short_desc"] = $this->objects[$i]["obj_desc_short"];
+                    $sr["obj_comment"] = $this->checkStringBr($this->objects[$i]["obj_desc"]);
+                    $sr["obj_short_desc"] = $this->checkStringBr($this->objects[$i]["obj_desc_short"]);
                     $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
                     $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
@@ -212,6 +223,11 @@ class FrontPageContent extends Modules {
             $text .= $this->getReplaceTemplate($sr, "obj_table");
         }
         return $text;
+    }
+
+    private function checkStringBr($string){
+        $string = str_replace(array("\r\n", "\r", "\n", "\\n"), "<br />", $string);
+        return $string;
     }
 
     private function getContacts($contact, $created_id, $work){
@@ -232,7 +248,7 @@ class FrontPageContent extends Modules {
                 }
             }
         }
-        return $contacts;
+        return  $this->checkStringBr($contacts);
     }
 
     private function getActions($obj_id, $work, $pre_work, $created, $who_deleted) {
@@ -241,14 +257,14 @@ class FrontPageContent extends Modules {
         // Сделать разделение по типам страницы
         switch ($typepage) {
             case "in_work":
-                $editlink = $this->config->siteAddress."?view=objedit&id=".$obj_id;
-                $worklink = $this->config->siteAddress."?do=cancel_work&id=".$obj_id;
+                $editlink = $this->config->siteAddress."cabinet/"."?view=objedit&id=".$obj_id;
+                $worklink = $this->config->siteAddress."cabinet/"."?do=cancel_work&id=".$obj_id;
                 if ($work != 0 || $pre_work != 0) {
                     $inwork = "<a href='$worklink' title='Убрать из работы'><i class=\"fa fa-gears fa-lg cancel\"></i></a>";
                 } else {
                     $inwork = "<a href='$worklink' title='Убрать из работы'><i class=\"fa fa-gears fa-lg cancel\"></i></a>";
                 }
-                $deletelink = $this->config->siteAddress."?typepage=in_work&do=pre_delete&id=".$obj_id;
+                $deletelink = $this->config->siteAddress."cabinet/"."?typepage=in_work&do=pre_delete&id=".$obj_id;
                 if($created == $this->user_info["id"] || $work == $this->user_info["id"]) {
                     $delete = "<a href='$deletelink' title='Удалить'><i class=\"fa fa-trash fa-lg\"></i></a>";
                     $edit = "<a href='$editlink' title='Редактировать'><i class=\"fa fa-edit fa-lg\"></i></a>";
@@ -260,35 +276,35 @@ class FrontPageContent extends Modules {
                 return $edit.$inwork.$favorites.$delete;                
             case "pre_working":
                 $who = $this->user->getFieldOnID($pre_work, "name");
-                $acceptlink = $this->config->siteAddress."?typepage=pre_working&do=in_work&id=".$obj_id;
-                $canсelllink = $this->config->siteAddress."?typepage=pre_working&do=cancel_in_work&id=".$obj_id;
+                $acceptlink = $this->config->siteAddress."cabinet/"."?typepage=pre_working&do=in_work&id=".$obj_id;
+                $canсelllink = $this->config->siteAddress."cabinet/"."?typepage=pre_working&do=cancel_in_work&id=".$obj_id;
                 $who_pre = "<p style='color: #BABABA'>От ".$who."</p>";
                 $accept = "<a href='$acceptlink' title='Подтвердить'><i class=\"fa fa-check fa-lg\"></i></a>";
                 $canсell = "<a href='$canсelllink' title='Отклонить'><i class=\"fa fa-ban fa-lg\"></i></a>";
                 return $who_pre.$accept.$canсell;
             case "completed":
-                $acceptlink = $this->config->siteAddress."?typepage=completed&do=in_pre_work&id=".$obj_id;
-                $canсelllink = $this->config->siteAddress."?typepage=completed&do=pre_delete&id=".$obj_id;
+                $acceptlink = $this->config->siteAddress."cabinet/"."?typepage=completed&do=in_pre_work&id=".$obj_id;
+                $canсelllink = $this->config->siteAddress."cabinet/"."?typepage=completed&do=pre_delete&id=".$obj_id;
                 $accept = "<a href='$acceptlink' title='Вернуть в работу'><i class=\"fa fa-gears fa-lg\"></i></a>";
                 $canсell = "<a href='$canсelllink' title='Удалить'><i class=\"fa fa-trash fa-lg\"></i></a>";
                 return $accept.$canсell;
             case "deleted":
                 $who = $this->user->getFieldOnID($who_deleted, "name");
-                $acceptlink = $this->config->siteAddress."?typepage=deleted&do=delete&id=".$obj_id;
-                $canсelllink = $this->config->siteAddress."?typepage=deleted&do=cancel_delete&id=".$obj_id;
+                $acceptlink = $this->config->siteAddress."cabinet/"."?typepage=deleted&do=delete&id=".$obj_id;
+                $canсelllink = $this->config->siteAddress."cabinet/"."?typepage=deleted&do=cancel_delete&id=".$obj_id;
                 $who_pre = "<p style='color: #BABABA'>От ".$who."</p>";
                 $accept = "<a href='$acceptlink' title='Удалить навсегда'><i class=\"fa fa-trash fa-lg\"></i></a>";
                 $canсell = "<a href='$canсelllink' title='Восстановить'><i class=\"fa fa-reply fa-lg\"></i></a>";
                 return $who_pre.$accept.$canсell;                
             default:
-                $editlink = $this->config->siteAddress."?view=objedit&id=".$obj_id;
-                $worklink = $this->config->siteAddress."?do=in_pre_work&id=".$obj_id;
+                $editlink = $this->config->siteAddress."cabinet/"."?view=objedit&id=".$obj_id;
+                $worklink = $this->config->siteAddress."cabinet/"."?do=in_pre_work&id=".$obj_id;
                 if ($work != 0 || $pre_work != 0) {
                     $inwork = "<i class=\"fa fa-gears fa-lg disabled\"></i>";
                 } else {
                     $inwork = "<a href='$worklink' title='Взять в работу'><i class=\"fa fa-gears fa-lg\"></i></a>";
                 }
-                $deletelink = $this->config->siteAddress."?do=pre_delete&id=".$obj_id;
+                $deletelink = $this->config->siteAddress."cabinet/"."?do=pre_delete&id=".$obj_id;
                 if($created == $this->user_info["id"] || $work == $this->user_info["id"] || $this->user_info["access_lvl"] == 2) {
                     $delete = "<a href='$deletelink' title='Удалить'><i class=\"fa fa-trash fa-lg\"></i></a>";
                     $edit = "<a href='$editlink' title='Редактировать'><i class=\"fa fa-edit fa-lg\"></i></a>";
@@ -1347,10 +1363,10 @@ class FrontPageContent extends Modules {
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Обьекты<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
-                            <li><a href=\"".$this->config->siteAddress."\">Просмотр обьектов</a></li>
-                            <li><a href=\"".$this->config->siteAddress."?view=objcreate\">Добавить новый</a></li>";
+                            <li><a href=\"".$this->config->siteAddress."cabinet/"."\">Просмотр обьектов</a></li>
+                            <li><a href=\"".$this->config->siteAddress."cabinet/"."?view=objcreate\">Добавить новый</a></li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .="<li><a href=\"".$this->config->siteAddress."?view=export\">Отчет по обьектам</a></li>";
+            $text .="<li><a href=\"".$this->config->siteAddress."cabinet/"."?view=export\">Отчет по обьектам</a></li>";
         }
         $text .= "</ul>
                     </li>
@@ -1358,32 +1374,32 @@ class FrontPageContent extends Modules {
                         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Пользователь<span class=\"caret\"></span>
                         </a>
                         <ul class=\"dropdown-menu\">
-                            <li><a href=\"".$this->config->siteAddress."?view=profileedit%editprofile%\">Редактирование профиля</a></li>";
+                            <li><a href=\"".$this->config->siteAddress."cabinet/"."?view=profileedit%editprofile%\">Редактирование профиля</a></li>";
         if ($this->user_info["access_lvl"] == 2) {
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=reg\">Добавить нового пользователя</a></li>";
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=profiles\">Все пользователи</a></li>";
+            $text .= "<li><a href=\"" . $this->config->siteAddress."cabinet/" . "?view=reg\">Добавить нового пользователя</a></li>";
+            $text .= "<li><a href=\"" . $this->config->siteAddress."cabinet/" . "?view=profiles\">Все пользователи</a></li>";
         }
         $text .= "</ul></li>";
         if ($this->user_info["access_lvl"] == 2) {
             $text .= "<li class=\"dropdown\">
                         <a class=\"dropdown - toggle\" data-toggle=\"dropdown\" href=\"#\">Сообщения<span class=\"caret\"></span></a>
                         <ul class=\"dropdown-menu\" >
-                            <li ><a href = \"".$this->config->siteAddress."?view=messages\" >Просмотр сообщений</a ></li >";
-            $text .= "<li><a href=\"" . $this->config->siteAddress . "?view=add_message\" >Добавить новое сообщение</a ></li >";
+                            <li ><a href = \"".$this->config->siteAddress."cabinet/"."?view=messages\" >Просмотр сообщений</a ></li >";
+            $text .= "<li><a href=\"" . $this->config->siteAddress ."cabinet/". "?view=add_message\" >Добавить новое сообщение</a ></li >";
             $text .= "</ul></li>";
         } else {
             $text .= "<li>
-                        <a href=\"".$this->config->siteAddress."?view=messages\">Сообщения</a>
+                        <a href=\"".$this->config->siteAddress."cabinet/"."?view=messages\">Сообщения</a>
                         </li >";
         }
 
         if ($this->user_info["access_lvl"] == 2) {
           $text .= "<li>
-                        <a href=\"".$this->config->siteAddress."?view=comfort\">Удобства</a>
+                        <a href=\"".$this->config->siteAddress."cabinet/"."?view=comfort\">Удобства</a>
                     </li>";
           }
            $text .="<li>
-                        <a href=\"".$this->config->siteAddress."?view=favorites\">Избранное</a>
+                        <a href=\"".$this->config->siteAddress."cabinet/"."?view=favorites\">Избранное</a>
                     </li>
                 </ul>";
         return $text;

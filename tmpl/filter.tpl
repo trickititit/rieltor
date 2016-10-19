@@ -1,6 +1,6 @@
 
 <div id="filter">
-    <form name="filter" action="/" method="get">
+    <form name="filter" action="%address%cabinet\" method="get">
         <div class="row bg_top">
             <div class="col-md-12 top_filter">
                     <select id="type" name="type">
