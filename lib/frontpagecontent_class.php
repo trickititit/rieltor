@@ -227,7 +227,7 @@ class FrontPageContent extends ModulesCabinet {
 
     private function checkStringBr($string){
         $string = str_replace(array("\r\n", "\r", "\n", "\\n"), "<br />", $string);
-        return $string;
+        return htmlspecialchars_decode($string);
     }
 
     private function getContacts($contact, $created_id, $work){

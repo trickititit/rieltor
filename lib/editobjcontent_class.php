@@ -84,12 +84,12 @@ class EditObjContent extends ModulesCabinet {
                     $('#home_floors_1 select').val(\"".$this->obj["obj_home_floors"]."\");
                     $('#square input').val(\"".$this->obj["obj_square"]."\");
                     $('#kadastr input').val(\"".$this->obj["obj_kadastr"]."\");
-                    $('#desc textarea').val(\"".$this->obj["obj_desc"]."\");
+                    $('#desc textarea').val(\"".$this->gettextarea($this->obj["obj_desc"])."\");
                     $('#price input').val(\"".$this->obj["obj_price"]."\");
                     $('#doplata input').val(\"".$this->obj["obj_doplata"]."\");                    
-                    $('#client_contact input').val(\"".htmlspecialchars_decode($this->obj["obj_client_contact"])."\");
+                    $('#client_contact input').val(\"".$this->gettextarea($this->obj["obj_client_contact"])."\");
                     $('#hotelki textarea').val(\"".$this->obj["obj_hotelki"]."\");
-                    $('#comment textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc_short"])."\");
+                    $('#comment textarea').val(\"".$this->gettextarea($this->obj["obj_desc_short"])."\");
                     $('#price_square input').val(\"".$this->obj["obj_price_square"]."\");
                     $('#obj_id').val(".$this->obj["id"]."); 
                     $('#obj-id').val(".$this->obj["id"]."); 
@@ -122,12 +122,12 @@ class EditObjContent extends ModulesCabinet {
                     $('#earth_square input').val(\"".$this->obj["obj_earth_square"]."\");
                     $('#house_square input').val(\"".$this->obj["obj_house_square"]."\");
                     $('#kadastr input').val(\"".$this->obj["obj_kadastr"]."\");
-                    $('#desc textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc"])."\");
+                    $('#desc textarea').val(\"".$this->gettextarea($this->obj["obj_desc"])."\");
                     $('#price input').val(\"".$this->obj["obj_price"]."\");
                     $('#doplata input').val(\"".$this->obj["obj_doplata"]."\");                    
-                    $('#client_contact input').val(\"".htmlspecialchars_decode($this->obj["obj_client_contact"])."\");
+                    $('#client_contact input').val(\"".$this->gettextarea($this->obj["obj_client_contact"])."\");
                     $('#hotelki textarea').val(\"".$this->obj["obj_hotelki"]."\");
-                    $('#comment textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc_short"])."\");
+                    $('#comment textarea').val(\"".$this->gettextarea($this->obj["obj_desc_short"])."\");
                     $('#price_square input').val(\"".$this->obj["obj_price_square"]."\");
                     $('#obj_id').val(".$this->obj["id"].");
                     $('#obj-id').val(".$this->obj["id"]."); 
@@ -149,12 +149,12 @@ class EditObjContent extends ModulesCabinet {
                     $('#home_floors_1 select').val(\"".$this->obj["obj_home_floors"]."\");
                     $('#square input').val(\"".$this->obj["obj_square"]."\");
                     $('#kadastr input').val(\"".$this->obj["obj_kadastr"]."\");
-                    $('#desc textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc"])."\");
+                    $('#desc textarea').val(\"".$this->gettextarea($this->obj["obj_desc"])."\");
                     $('#price input').val(\"".$this->obj["obj_price"]."\");
                     $('#doplata input').val(\"".$this->obj["obj_doplata"]."\");                    
-                    $('#client_contact input').val(\"".htmlspecialchars_decode($this->obj["obj_client_contact"])."\");
+                    $('#client_contact input').val(\"".$this->gettextarea($this->obj["obj_client_contact"])."\");
                     $('#hotelki textarea').val(\"".$this->obj["obj_hotelki"]."\");
-                    $('#comment textarea').val(\"".htmlspecialchars_decode($this->obj["obj_desc_short"])."\");
+                    $('#comment textarea').val(\"".$this->gettextarea($this->obj["obj_desc_short"])."\");
                     $('#price_square input').val(\"".$this->obj["obj_price_square"]."\");
                     $('#obj_id').val(".$this->obj["id"].");
                     $('#obj-id').val(".$this->obj["id"]."); 
@@ -183,6 +183,12 @@ class EditObjContent extends ModulesCabinet {
                     myMap.geoObjects.add(_point);});";
 
         return $text;
+    }
+
+    private function gettextarea($string) {
+        $string = htmlspecialchars_decode($string);
+        $string = addslashes($string);
+        return $string;
     }
     
 
