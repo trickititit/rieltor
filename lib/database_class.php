@@ -167,6 +167,24 @@ class DataBase {
         return $this->select($table_name, array("*"), "`$field_on` = '".addslashes($value_on)."' AND `$field_off` = '".addslashes($value_off)."' AND `$field` = '".addslashes($value)."'", $order, $up);
     }
 
+    public function getAllOnFields($table_name, $fields_values, $un_fields_values, $order, $up) {
+        $where = "";
+        $count = 0;
+        foreach ($fields_values as $key => $value) {
+            if ($count > 0) $where .= " AND";
+            $where .= "`$key` = '".addslashes($value)."'";
+            $count++;
+        }
+        if (isset($un_fields_values)) {
+            foreach ($un_fields_values as $key => $value) {
+                if ($count > 0) $where .= " AND";
+                $where .= "`$key` != '".addslashes($value)."'";
+                $count++;
+            } 
+        }
+        return $this->select($table_name, array("*"), $where, $order, $up);
+    }
+
     // конец get Объект
 
     //get количество
@@ -186,8 +204,22 @@ class DataBase {
         return $data[0]["COUNT(*)"];
     }
 
-    public function getCountOnFieldAndOnFieldAndField ($table_name, $field_on, $value_on, $field_off, $value_off, $field_one, $value_one) {
-        $data = $this->select($table_name, array("COUNT(*)"), "`$field_on` = '".addslashes($value_on)."' AND `$field_off` = '".addslashes($value_off)."' AND `$field_one` = '".addslashes($value_one)."'");
+    public function getCountOnFields ($table_name, $fields_values, $un_fields_values) {
+        $where = "";
+        $count = 0;
+        foreach ($fields_values as $key => $value) {
+            if ($count > 0) $where .= " AND";
+            $where .= "`$key` = '".addslashes($value)."'";
+            $count++;
+        }
+        if (isset($un_fields_values)) {
+            foreach ($un_fields_values as $key => $value) {
+                if ($count > 0) $where .= " AND";
+                $where .= "`$key` != '".addslashes($value)."'";
+                $count++;
+            }
+        }
+        $data = $this->select($table_name, array("COUNT(*)"), $where);
         return $data[0]["COUNT(*)"];
     }
 

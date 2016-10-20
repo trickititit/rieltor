@@ -52,6 +52,8 @@
                 break;
             case "check_completed": $doit->doCompleted();
                 break;
+            case "activate": $doit->doActivate();
+                break;
             default: break;
         }
     }

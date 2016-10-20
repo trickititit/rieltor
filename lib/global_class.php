@@ -60,6 +60,10 @@ abstract class GlobalClass {
 
     // OBJ
 
+    public function getAllOnFields($fields_values, $un_fields_values = array(), $order, $up) {
+        return $this->db->getAllOnFields($this->table_name, $fields_values, $un_fields_values, $order, $up);
+    }
+
     public function getAll($order = "", $up = true) {
         return $this->db->getAll($this->table_name, $order, $up);
     }
@@ -99,6 +103,10 @@ abstract class GlobalClass {
 
     public function getCountOnFieldAndOnField($field_on, $value_on, $field_off, $value_off){
         return $this->db->getCountOnFieldAndOnField($this->table_name, $field_on, $value_on, $field_off, $value_off);
+    }
+
+    public function getCountOnFields($fields_values, $un_fields_values = array()) {
+        return $this->db->getCountOnFields($this->table_name, $fields_values, $un_fields_values);
     }
 
     public function getCountOnFieldAndOnFieldAndField($field_on, $value_on, $field_off, $value_off, $field, $value){

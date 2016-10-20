@@ -187,7 +187,7 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
-                    $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"]);
+                    $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"], $this->objects[$i]["completed_id"]);
                     break;
                 case "2": $sr["obj_photo"] = ($set_image)?"<i class=\"fa fa-camera fa-lg\"></i>": "";
                     $sr["obj_data"] = $this->formantDate($this->objects[$i]["date"]);
@@ -202,7 +202,7 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
-                    $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"]);
+                    $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"], $this->objects[$i]["completed_id"]);
                     break;
                 case "3": $sr["obj_photo"] = ($set_image)?"<i class=\"fa fa-camera fa-lg\"></i>": "";
                     $sr["obj_data"] = $this->formantDate($this->objects[$i]["date"]);
@@ -217,7 +217,7 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
-                    $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"]);
+                    $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"], $this->objects[$i]["completed_id"]);
                     break;
             }
             $text .= $this->getReplaceTemplate($sr, "obj_table");
@@ -251,7 +251,7 @@ class FrontPageContent extends ModulesCabinet {
         return  $this->checkStringBr($contacts);
     }
 
-    private function getActions($obj_id, $work, $pre_work, $created, $who_deleted) {
+    private function getActions($obj_id, $work, $pre_work, $created, $who_deleted, $completed) {
 
         $typepage = $this->data["typepage"];
         // Сделать разделение по типам страницы
@@ -283,9 +283,9 @@ class FrontPageContent extends ModulesCabinet {
                 $canсell = "<a href='$canсelllink' title='Отклонить'><i class=\"fa fa-ban fa-lg\"></i></a>";
                 return $who_pre.$accept.$canсell;
             case "completed":
-                $acceptlink = $this->config->siteAddress."cabinet/"."?typepage=completed&do=in_pre_work&id=".$obj_id;
+                $acceptlink = $this->config->siteAddress."cabinet/"."?typepage=completed&do=activate&id=".$obj_id;
                 $canсelllink = $this->config->siteAddress."cabinet/"."?typepage=completed&do=pre_delete&id=".$obj_id;
-                $accept = "<a href='$acceptlink' title='Вернуть в работу'><i class=\"fa fa-gears fa-lg\"></i></a>";
+                $accept = "<a href='$acceptlink' title='Активировать'><i class=\"fa fa-bell fa-lg\"></i></a>";
                 $canсell = "<a href='$canсelllink' title='Удалить'><i class=\"fa fa-trash fa-lg\"></i></a>";
                 return $accept.$canсell;
             case "deleted":
@@ -299,13 +299,13 @@ class FrontPageContent extends ModulesCabinet {
             default:
                 $editlink = $this->config->siteAddress."cabinet/"."?view=objedit&id=".$obj_id;
                 $worklink = $this->config->siteAddress."cabinet/"."?do=in_pre_work&id=".$obj_id;
-                if ($work != 0 || $pre_work != 0) {
+                if ($work != 0 || $pre_work != 0 || $completed != 0 ) {
                     $inwork = "<i class=\"fa fa-gears fa-lg disabled\"></i>";
                 } else {
                     $inwork = "<a href='$worklink' title='Взять в работу'><i class=\"fa fa-gears fa-lg\"></i></a>";
                 }
                 $deletelink = $this->config->siteAddress."cabinet/"."?do=pre_delete&id=".$obj_id;
-                if($created == $this->user_info["id"] || $work == $this->user_info["id"] || $this->user_info["access_lvl"] == 2) {
+                if($created == ($this->user_info["id"] && $completed == 0) || ($work == $this->user_info["id"] && $completed == 0) || $this->user_info["access_lvl"] == 2) {
                     $delete = "<a href='$deletelink' title='Удалить'><i class=\"fa fa-trash fa-lg\"></i></a>";
                     $edit = "<a href='$editlink' title='Редактировать'><i class=\"fa fa-edit fa-lg\"></i></a>";
                 } else {

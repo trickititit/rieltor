@@ -31,19 +31,19 @@ class Object extends GlobalClass
     }
     
     public function getCountMy($user_id) {
-        return $this->getCountOnFieldAndOnField("created_id", $user_id, "deleted_id", "0");
+        return $this->getCountOnFields(array("created_id" => $user_id, "deleted_id" => "0", "completed_id" => "0"));
     }
 
     public function getCountInWork($user_id) {
-        return $this->getCountOnFieldAndOnFieldAndField("working_id", $user_id, "deleted_id", "0", "completed_id", "0");
+        return $this->getCountOnFields(array("working_id" => $user_id, "deleted_id" => "0", "completed_id" => "0"));
     }
 
     public function getCountCompleted($user_id) {
-        return $this->getCountOnFieldAndOnField("completed_id", $user_id, "deleted_id", "0");
+        return $this->getCountOnFields(array("completed_id" => $user_id, "deleted_id" => "0"));
     }
 
     public function getCountPreWorking() {
-        return $this->getCountOnFieldAndNotField("deleted_id", "0", "pre_working_id", "0");
+        return $this->getCountOnFields(array("deleted_id" => "0"), array("pre_working_id" => "0"));
     }
     
     public function getCountDeleted() {
@@ -53,27 +53,27 @@ class Object extends GlobalClass
     //OBJ
 
     public function getAllObj(){
-        return $this->getAllOnField("deleted_id", "0", $this->order, $this->up);
+        return $this->getAllOnFields(array("deleted_id" => "0"), array(), $this->order, $this->up);
     }
     
     public function getDeleted(){
-        return $this->getAllOnNoField("deleted_id", "0", $this->order, $this->up);
+        return $this->getAllOnFields(array(), array("deleted_id" => "0"), $this->order, $this->up);
     }
 
     public function getMy($user_id){
-        return $this->getAllOnFieldAndField("created_id", $user_id, "deleted_id", "0", $this->order, $this->up);
+        return $this->getAllOnFields(array("created_id" => $user_id, "deleted_id" => "0", "completed_id" => "0"), array(), $this->order, $this->up);
     }
 
     public function getInWork($user_id){
-        return $this->getAllOnFieldAndFieldAndField("working_id", $user_id, "deleted_id", "0", "completed_id", "0", $this->order, $this->up);
+        return $this->getAllOnFields(array("working_id" => $user_id, "deleted_id" => "0", "completed_id" => "0"), array(), $this->order, $this->up);
     }
 
     public function getCompleted($user_id){
-        return $this->getAllOnFieldAndField("completed_id", $user_id, "deleted_id", "0", $this->order, $this->up);
+        return $this->getAllOnFields(array("completed_id" => $user_id, "deleted_id" => "0"), array(), $this->order, $this->up);
     }
 
     public function getPreWorking(){
-        return $this->getAllOnFieldAndNotField("deleted_id", "0", "pre_working_id", "0", $this->order, $this->up);
+        return $this->getAllOnFields(array("deleted_id" => "0"), array("pre_working_id" => "0"), $this->order, $this->up);
     }
     
     public function getAllOnField_($field, $value)
@@ -84,6 +84,10 @@ class Object extends GlobalClass
 
     public function editInWork($obj_id, $user_id){
         return $this->edit($obj_id, array("created_id" => $user_id,"working_id" => $user_id, "pre_working_id" => "0", "completed_id" => "0", "date" => time()));
+    }
+
+    public function editActivate($obj_id, $activate_state){
+        return $this->edit($obj_id, array("completed_id" => "0", "activate_state" => $activate_state));
     }
 
     public function editCancelInWork($obj_id){

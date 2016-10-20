@@ -103,6 +103,24 @@ class doIt {
         }
     }
 
+    public function doActivate() {
+        $obj_id = $this->data["id"];
+        $obj = $this->object->get($obj_id);
+        $activate_state = $obj["activate_state"];
+        $activate_state++;
+        $result = $this->object->editActivate($obj_id, $activate_state);
+        if ($result) {
+            $_SESSION["message"] = "SUCCESS_ACTIVATE_OBJ";
+            $_SESSION["type_message"] = "success";
+            $this->redirect($this->link);
+        }
+        else {
+            $_SESSION["message"] = "FAIL_ACTIVATE_OBJ";
+            $_SESSION["type_message"] = "warning";
+            $this->redirect($this->link);
+        } 
+    }
+
     public function doCancelInWork(){
         $obj_id = $this->data["id"];        
         $result = $this->object->editCancelInWork($obj_id);

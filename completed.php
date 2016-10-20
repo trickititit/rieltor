@@ -15,7 +15,7 @@ $now_date = time();
     for ($i = 0; $i < count($objects); $i++) {
     $obj_date = new DateTime();
     $obj_date->setTimestamp($objects[$i]["date"]);
-    $obj_date->add(new DateInterval('P1M'));
+    $obj_date->add(new DateInterval("P".(1 + $objects[$i]["activate_state"])."M"));
     if ($obj_date->getTimestamp() < $now_date) {
         $object->doCompleted($objects[$i]["id"], $objects[$i]["created_id"]);
         }
