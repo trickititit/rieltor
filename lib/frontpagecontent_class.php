@@ -179,11 +179,11 @@ class FrontPageContent extends ModulesCabinet {
                            $sr["obj_square"] = $this->objects[$i]["obj_square"]." м²";
                            $sr["obj_form"] = $this->objects[$i]["obj_floor"]."/".$this->objects[$i]["obj_home_floors"]." эт.";
                     $sr["obj_title"] = ($this->objects[$i]["obj_rooms"] == "Студия")?$this->objects[$i]["obj_rooms"]." квартира": $this->objects[$i]["obj_rooms"]."-к квартира";
-                    $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
+                    $sr["obj_address"] = $this->replaceAddress($this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"]);
                     $sr["obj_comment"] = $this->checkStringBr($this->objects[$i]["obj_desc"]);
                     $sr["obj_short_desc"] = $this->checkStringBr($this->objects[$i]["obj_desc_short"]);
-                    $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
-                    $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
+                    $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"]);
+                    $sr["obj_price"] = number_format($this->objects[$i]["obj_price"]);
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
@@ -194,11 +194,11 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_square"] = $this->objects[$i]["obj_house_square"]." м²";
                     $sr["obj_form"] = "на участке ".$this->objects[$i]["obj_earth_square"]." сот.";
                     $sr["obj_title"] = $this->objects[$i]["obj_type"];
-                    $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
+                    $sr["obj_address"] = $this->replaceAddress($this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"]);
                     $sr["obj_comment"] = $this->checkStringBr($this->objects[$i]["obj_desc"]);
                     $sr["obj_short_desc"] = $this->checkStringBr($this->objects[$i]["obj_desc_short"]);
-                    $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
-                    $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
+                    $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"]);
+                    $sr["obj_price"] = number_format($this->objects[$i]["obj_price"]);
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
@@ -209,11 +209,11 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_square"] = $this->objects[$i]["obj_square"]." м²";
                     $sr["obj_form"] = $this->objects[$i]["obj_floor"]."/".$this->objects[$i]["obj_home_floors"]." эт.";
                     $sr["obj_title"] = "Комната в ".$this->objects[$i]["obj_rooms"]."-к";
-                    $sr["obj_address"] = $this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"];
+                    $sr["obj_address"] = $this->replaceAddress($this->objects[$i]["obj_city"].",<br />".$this->objects[$i]["obj_area"].",<br />".$this->objects[$i]["obj_address"]);
                     $sr["obj_comment"] = $this->checkStringBr($this->objects[$i]["obj_desc"]);
                     $sr["obj_short_desc"] = $this->checkStringBr($this->objects[$i]["obj_desc_short"]);
-                    $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"])." руб.";
-                    $sr["obj_price"] = number_format($this->objects[$i]["obj_price"])." руб.";
+                    $sr["obj_doplata"] = number_format($this->objects[$i]["obj_doplata"]);
+                    $sr["obj_price"] = number_format($this->objects[$i]["obj_price"]);
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
@@ -223,6 +223,12 @@ class FrontPageContent extends ModulesCabinet {
             $text .= $this->getReplaceTemplate($sr, "obj_table");
         }
         return $text;
+    }
+
+    private function replaceAddress($address){
+        $search = array("микрорайон", "улица", "Квартал", "квартал", "поселок");
+        $replace_ = array("мкр", "ул", "кв-л", "кв-л", "п");
+        return str_replace($search, $replace_, $address);
     }
 
     private function checkStringBr($string){

@@ -18,7 +18,11 @@ require_once "lib/comfortcontent_class.php";
 require_once "lib/favoritescontent_class.php";
 require_once  "lib/doit_class.php";
 require_once  "lib/mainpagecontent_class.php";
+require_once "lib/config_class.php";
 
+$config = new Config();
+$link = $config->siteAddress."cabinet/";
+header("Location: $link");
 $db = new DataBase();
 $view = $_GET["view"];
 $do = $_GET["do"];

@@ -44,7 +44,7 @@ class ViewMainPageContent extends Modules {
 
     protected function getTop()    {
 
-        return $this->getTemplateOnly("mainpage_cont");
+
     }    
     
 

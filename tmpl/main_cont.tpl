@@ -52,7 +52,63 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="menu"></div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="#m1">Главная</a>
+                        <div class="dropdown-nav"></div>
+                    </li>
+                    <li><a href="#m2">О нас</a>
+                        <div class="dropdown-nav"></div>
+                    </li>
+
+                    <li><a href="#m3">Наши услуги</a>
+                        <div class="col-md-12 dropdown-nav">
+                            <div class="col-md-3"><div class="colum">
+                                    <ul>
+                                        <li><a href="#m3_1">Наша услуга №1</a>
+                                            <ul>
+                                                <li><a href="#m3_1_1">Дополнение к услуге 1</a></li>
+                                                <li><a href="#m3_1_1">Дополнение к услуге 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#m3_2">Наша услуга №2</a>
+                                            <ul>
+                                                <li><a href="#m3_2_1">Дополнение к услуге 3</a></li>
+                                                <li><a href="#m3_2_1">Дополнение к услуге 4</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#m3_3">Наша услуга №3</a></li>
+                                        <li><a href="#m3_4">Наша услуга №4</a></li>
+                                        <li><a href="#m3_5">Услуга 5</a></li>
+                                    </ul>
+                                </div></div>
+                            <div class="col-md-3"><div class="colum"><h6>Залупки</h6></div></div>
+                            <div class="col-md-3"><div class="colum"><h6>Опа</h6></div></div>
+                            <div class="col-md-3"><div class="colum"><h6>аааа</h6></div></div>
+                        </div>
+                    </li>
+                    <li><a href="#m4">Новости</a>
+                        <div class="dropdown-nav"></div>
+                    </li>
+                    <li><a href="#m5">Контакты</a>
+                        <div class="col-md-12 dropdown-nav">
+                            <div class="col-md-6">
+                                <div class="colum">
+                            <ul>
+                                <li><a href="#m5_1">Карта проезда</a>
+                                    <ul>
+                                        <li><a href="#m5_1_1">Дополнение для карты</a></li>
+                                        <li><a href="#m5_1_1">Дополнение для карты 2</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#m5_2">Форма обратной связи</a></li>
+                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav><!--menu1-->
         </div>
     </div>
     %top%
