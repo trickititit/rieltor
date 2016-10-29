@@ -112,11 +112,11 @@ class FavoritesContent extends ModulesCabinet {
     private function getImage($id){
         for ($i = 0; $i < count($this->images); $i++ ) {
             if ($id == $this->images[$i]["obj_id"]) {
-                $result = "/uploads/".$id."/".$this->images[$i]["new_name"];
+                $result = "../uploads/".$id."/".$this->images[$i]["new_name"];
                 break;
             }
         }
-        $result = (isset($result))? $result:"images/no-images.jpg";
+        $result = (isset($result))? $result:"../images/no-images.jpg";
         return $result;
         }
 

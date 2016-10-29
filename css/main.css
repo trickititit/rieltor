@@ -3,6 +3,14 @@
 	padding: 0;
 	}
 
+a:link, a:visited, a:hover, a:focus, a:active {
+    outline: none;
+}
+
+button:link, button:visited, button:hover, button:focus, button:active {
+    outline: none;
+}
+
 *:focus {outline: none;}
 
 @font-face
@@ -1342,7 +1350,7 @@ h1 {
 .fa-gears, .fa-edit, .fa-check, .fa-reply {
     opacity: 0.7;
     cursor: pointer;
-    float: right;
+    float: left;
 }
 
 .fa-gears:hover {
@@ -1361,7 +1369,7 @@ h1 {
     color: #f2ba00;
     opacity: 0.8;
     cursor: pointer;
-    float: right;
+    float: left;
     margin-right:6px;
 }
 
@@ -1381,8 +1389,8 @@ h1 {
 .fa-trash, .fa-ban {
     color: #d43f3a;
     opacity: 0.8;
-    float: right;
-    margin-right: 7px;
+    float: left;
+    margin-right: 6px;
 }
 
 .cancel {
@@ -1404,8 +1412,8 @@ h1 {
 .disabled {
     pointer-events: none;
     color: grey;
-    float: right;
-    margin-right: 7px;
+    float: left;
+    margin-right: 6px;
 }
 
 /* Избранное */
@@ -1640,15 +1648,7 @@ h1 {
     height: auto;
 }
 
-.tab_content {
-    height: 58px;
-    overflow: hidden;
-}
 
-.tab_content_hover {
-    overflow: visible;
-    height: auto;
-}
 
 .badge-war {
     background-color: #d43f3a;
@@ -1819,6 +1819,22 @@ h1 {
 .colum a:hover {
     opacity: 0.5;
     text-decoration: none;
+}
+
+.panel {
+    float: left;
+    width: 100%;
+}
+ .row_go {
+ min-height: 100px;
+ }
+
+ .panel-body {
+     min-height: 100px;
+ }
+
+.no_margin {
+    margin: 0;
 }
 
 .block_widget {

@@ -187,6 +187,7 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
+                    $sr["col-id"] = $this->objects[$i]["id"];
                     $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"], $this->objects[$i]["completed_id"]);
                     break;
                 case "2": $sr["obj_photo"] = ($set_image)?"<i class=\"fa fa-camera fa-lg\"></i>": "";
@@ -202,6 +203,7 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
+                    $sr["col-id"] = $this->objects[$i]["id"];
                     $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"], $this->objects[$i]["completed_id"]);
                     break;
                 case "3": $sr["obj_photo"] = ($set_image)?"<i class=\"fa fa-camera fa-lg\"></i>": "";
@@ -217,12 +219,42 @@ class FrontPageContent extends ModulesCabinet {
                     $sr["obj_deal"] = ($this->objects[$i]["obj_deal"] == "Продажа")?"<i class=\"fa fa-shopping-cart fa-lg\"></i>":"<i class=\"fa fa-retweet fa-lg\"></i>";
                     $sr["obj_client_contact"] = $this->getContacts($this->objects[$i]["obj_client_contact"], $this->objects[$i]["created_id"], $this->objects[$i]["working_id"]);
                     $sr["link"] = $this->config->siteAddress."content/?id=".$this->objects[$i]["id"];
+                    $sr["col-id"] = $this->objects[$i]["id"];
                     $sr["obj_action"] = $this->getActions($this->objects[$i]["id"], $this->objects[$i]["working_id"], $this->objects[$i]["pre_working_id"], $this->objects[$i]["created_id"], $this->objects[$i]["deleted_id"], $this->objects[$i]["completed_id"]);
                     break;
             }
             $text .= $this->getReplaceTemplate($sr, "obj_table");
         }
         return $text;
+    }
+
+    private function sortMassive($mass) {
+        $new_array = array();
+        for ($i = 0; $i < count($mass); $i++) {
+            $r = 0;
+            $count_equal = 0;
+            for ($g = 0; $g < count($mass); $g++) {
+                if ($mass[$i] > $mass[$g]) {
+                    $r++;
+                }
+                if ($mass[$i] == $mass[$g]) {
+                    $count_equal++;
+                }
+            }
+            $int = $r + 1;
+            if ($count_equal > 1) {
+                for ($eq = 0; $eq < $count_equal; $eq++ ) {
+                    $new_array[count($mass) - ($int + $eq)] = $mass[$i];
+                }
+                continue;
+            }
+            $new_array[count($mass) - ($int)] = $mass[$i];
+        }
+        $new_new_array = array();
+        for ($h = 0; $h < count($new_array); $h++) {
+            $new_new_array[] = $new_array[$h];
+        }
+        print_r($new_new_array);
     }
 
     private function replaceAddress($address){

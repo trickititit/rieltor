@@ -73,7 +73,7 @@
                                 <li><a href="#m3_5">Услуга 5</a></li>
                             </ul>
                         </div></div>
-                        <div class="col-md-3"><div class="colum"><h6>Залупки</h6></div></div>
+                        <div class="col-md-3"><div class="colum"><h6>Закупки</h6></div></div>
                             <div class="col-md-3"><div class="colum"><h6>Опа</h6></div></div>
                             <div class="col-md-3"><div class="colum"><h6>аааа</h6></div></div>
                         </div>
